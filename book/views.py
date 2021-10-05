@@ -1,9 +1,8 @@
+from django.db.models.base import Model
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.utils.safestring import SafeString
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
+from django.core.exceptions import ObjectDoesNotExist
 from book.templatetags.book_extras import get_readable
 from book.models import Book
 from book.forms import BookSearchForm
@@ -44,10 +43,18 @@ def book_add_search_view(request):
 
 
 def book_add_commit_view(request, id):
-
-    book = Book.objects.get(gutenberg_id__exact = id)
     
-    if not book:
+    try:
+        book = Book.objects.get(gutenberg_id__exact = id)
+        print(book)
+
+        book.copies_available += 1
+
+        book.save()
+
+        return HttpResponse("You've added a book")
+    
+    except ObjectDoesNotExist:
         response = requests.get(f'http://gutendex.com/books/{id}')
         data = response.json()
         
@@ -65,11 +72,5 @@ def book_add_commit_view(request, id):
         
         return HttpResponse("You've added a book")
     
-    print(book)
 
-    book.copies_available += 1
-    
-    book.save()
-
-    return HttpResponse("You've added a book")
     
