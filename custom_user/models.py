@@ -9,5 +9,7 @@ class CustomUser(AbstractUser):
     
     username = models.CharField(max_length=255, unique=True)
     checked_out_books = models.ManyToManyField(Book, blank=True)
-    library_card_number = models.CharField(default=random_card_number)
-    
+    library_card_number = models.CharField(max_length=10, default=random_card_number)
+
+    def __str__(self) -> str:
+        return self.username
