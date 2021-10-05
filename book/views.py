@@ -2,15 +2,16 @@ import requests
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.safestring import SafeString
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
+from book.templatetags.book_extras import get_readable
 from book.models import Book
 from book.forms import BookSearchForm
 
 # Create your views here.
 
 
-def AddBookView(request):
+def book_add_search_view(request):
     context = {
         "form": BookSearchForm,
         "results": {}
@@ -41,6 +42,34 @@ def AddBookView(request):
 
     return render(request, 'book/book_search_and_add.html', context)
 
-# class AddBookView(LoginRequiredMixin, CreateView):
-#     model = models.Book
-#     fields = ['title', 'text', 'author']
+
+def book_add_commit_view(request, id):
+
+    book = Book.objects.get(gutenberg_id__exact = id)
+    
+    if not book:
+        response = requests.get(f'http://gutendex.com/books/{id}')
+        data = response.json()
+        
+        
+        
+        new_book = Book(
+            gutenberg_id = data["id"],
+            title = data["title"],
+            author = data["authors"][0]["name"],
+            copies_available = 1,
+            text=get_readable(data["formats"]),
+        )
+    
+        new_book.save()
+        
+        return HttpResponse("You've added a book")
+    
+    print(book)
+
+    book.copies_available += 1
+    
+    book.save()
+
+    return HttpResponse("You've added a book")
+    
