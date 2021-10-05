@@ -1,6 +1,9 @@
+{% load book_extras %}
+
 <div class "book-card">
-    <img href=>
+    <img src={{result.formats | get_key:"image/jpeg"}} alt="book pic"/>
     <p>Title: {{result.title}}</p>
     <p>Author: {{result.authors.0.name}}</p>
-    <p>Read Online: {{result.formats}}</p>
+    <p>Read Online: {{result.formats | get_readable}}</p>
+    <button onclick = "window.location.href='/book/add/{{result.id}}'">Provide a Copy</button>
 </div>

@@ -1,6 +1,7 @@
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils.safestring import SafeString
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.views.generic.edit import CreateView
 from book.models import Book
@@ -34,10 +35,8 @@ def AddBookView(request):
                 cleaned_author = data["author"].replace(" ", "%20")
                 search_str += cleaned_author
 
-            print(search_str)
             response = requests.get(search_str)
             data = response.json()
-            print(data)
             context["results"] = data["results"]
 
     return render(request, 'book/book_search_and_add.html', context)
