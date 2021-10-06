@@ -12,3 +12,10 @@ Siddiq Douglas - https://github.com/siddiqdouglas
 
 # References
 Python Anywhere - How to Set Up Environment Variables for Your Web Apps - https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/
+
+Pradyunsg and 110j - Navigation in Django Templates - 
+https://stackoverflow.com/questions/340888/navigation-in-django
+
+DelftStack - Check the Logged In User in Templates in Django - https://www.delftstack.com/howto/django/django-check-logged-in-user/
+
+W3Schools - CSS Navigation Bar - https://www.w3schools.com/css/css_navbar.asp
