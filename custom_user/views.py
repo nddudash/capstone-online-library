@@ -1,5 +1,7 @@
+from django.db import models
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from custom_user.forms import UserForm
+from custom_user.models import CustomUser
 
 from django.contrib.auth import login, authenticate,  logout
 
@@ -7,7 +9,7 @@ from django.contrib.auth import login, authenticate,  logout
 # Create your views here.
 
 
-def login(request):
+def login_view(request):
     if request.method == "POST":
         forms = UserForm(request.POST)
         if forms.is_valid():
@@ -29,11 +31,12 @@ def sign_up_view(request):
         form = UserForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            user = authenticate(
-                request, username=data.get("username"), password=data.get("password")
+            new_user = CustomUser.objects.create(
+                username = data['username'],
+                password = data['password']
             )
-            if user:
-                login(request, user)
+            if new_user:
+                login(request, new_user)
                 return HttpResponseRedirect(
                     request.GET.get("next", reverse("home"))
                 )
