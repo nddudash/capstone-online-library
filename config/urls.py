@@ -18,7 +18,7 @@ from django.urls import path
 from book.views import book_add_search_view, book_add_commit_view, book_detail
 from custom_user.views import login_view, logout_view, sign_up_view
 from book import views
-from checkout.views import checkout_book_view
+from checkout.views import checkout_book_view, return_book_view
 
 urlpatterns = [
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
@@ -29,5 +29,6 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('sign_up/', sign_up_view, name='sign_up'),
     path('book_list/', views.BookList_view, name='book_list'),
-    path('checkout/<int:book_id>/', checkout_book_view, name='checkout')
+    path('checkout/<int:book_id>/', checkout_book_view, name='checkout'),
+    path('return/<int:book_id>/', return_book_view, name='return'),
 ]
