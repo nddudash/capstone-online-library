@@ -1,0 +1,18 @@
+.book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: 2%;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.book-card .book-img {
+    width: 150px;
+    height: 250px;
+}
+
+.book-card .book-img img {
+    width: 150px;
+    height: 250px;
+}
