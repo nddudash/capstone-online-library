@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 
 # CITATION - https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/
 project_folder = os.getcwd()
-print(project_folder)
 load_dotenv(os.path.join(project_folder, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

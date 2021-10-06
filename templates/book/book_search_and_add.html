@@ -1,3 +1,7 @@
+{% load static %}
+<link rel="stylesheet" href={% static "book/main.css" %}>
+
+
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Search">
