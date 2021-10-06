@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'custom_user',
     'book',
+    'checkout',
 ]
 
 MIDDLEWARE = [
