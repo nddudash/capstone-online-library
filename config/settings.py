@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'book',
     'custom_user',
+    'notification'
 ]
 
 MIDDLEWARE = [
