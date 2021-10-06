@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from book.views import book_add_search_view, book_add_commit_view
+from custom_user.views import login_view, sign_up_view
+from book import views
 
 urlpatterns = [
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
     path('books/add/', book_add_search_view, name='AddBookView'),
     path('admin/', admin.site.urls),
+    path('login/', login_view, name='login'),
+    path('sign_up/', sign_up_view, name='sign_up'),
+    path('book_list/', views.BookList_view, name='book_list'),
 ]

@@ -68,3 +68,8 @@ def book_add_commit_view(request, id):
 
         # TODO: Redirect to Book Detail View
         return HttpResponse("You've added a book")
+
+
+def BookList_view(request):
+    books = Book.objects.all()
+    return render(request, 'book_list.html', {'books': books})
