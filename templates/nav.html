@@ -1,0 +1,14 @@
+{% comment %} cITATION -
+https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
+
+<div class="nav-wrapper">
+  <nav>
+    {% if not logged_in %}
+    <a href="/login/">Login</a>
+    {% elif logged_in %}
+    <a href="/">Home</a> | <a href="/tickets/new">Open Ticket</a> |
+    <a href="/users/{{user.id}}/">Profile</a> | <a href="/users/">Users</a> |
+    <a href="/logout/">Logout</a>
+    {% endif %}
+  </nav>
+</div>
