@@ -1,0 +1,23 @@
+{% comment %} CITATION -
+https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "book/main.css" %}>
+
+<div class="nav-wrapper">
+  <nav class="nav-bar">
+    <ul class="nav-list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/book_list/">Catalouge</a></li>
+      <li><a href="/books/add/">Donate</a></li>
+      {% if not request.user.is_authenticated %}
+      <li><a href="/login/">Login</a></li>
+      <li><a href="/sign_up/">Sign Up</a></li>
+      {% elif request.user.is_authenticated %}
+      {% comment %} <li><a href="/notifications/{{user.id}}">Notifications</a></li> {% endcomment %}
+      {% comment %} <li><a href="/users/{{user.id}}">Profile</a></li> {% endcomment %}
+      <li><a href="/logout">Logout</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
