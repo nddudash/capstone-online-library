@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'custom_user',
     'notification',
     'book',
+    'checkout',
 ]
 
 MIDDLEWARE = [
