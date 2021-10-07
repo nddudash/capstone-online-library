@@ -13,8 +13,7 @@ def checkout_book_view(request, book_id):
         book.save()
         checkout_user.checked_out_books.add(book)
         checkout_user.save()
-        print(checkout_user.checked_out_books.all())
-#   This will redirect to the home page or user detail page, once they are finished
+
         return HttpResponseRedirect(reverse('book_detail_page', kwargs={'id': book_id}))
 #   This is just placeholder text for now, pending proper error handling
     return HttpResponse('Something went wrong')
@@ -29,8 +28,7 @@ def return_book_view(request, book_id):
         book.save()
         checkout_user.checked_out_books.remove(book)
         checkout_user.save()
-        print(checkout_user.checked_out_books.all())
-#   This will redirect to the home page or user detail page, once they are finished
-        return HttpResponse('You have successfully returned this book')
+
+        return HttpResponseRedirect(reverse('book_detail_page', kwargs={'id': book_id}))
 #   This is just placeholder text for now, pending proper error handling
     return HttpResponse('Something went wrong')
