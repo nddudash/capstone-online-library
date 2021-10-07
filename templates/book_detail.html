@@ -5,7 +5,13 @@
 <p>Title: {{book.title}}</p>
 <p>Author:{{book.author}}</p>
 <p>Available Copies: {{book.copies_available}}</p>
-{%if book.copies_available == 0%}
+{%if book in request.user.checked_out_books.all%}
+<p>You already have this book checked out.</p>
+{%elif book.copies_available and book not in request.user.checked_out_books.all%}
+<p>You can check a copy of this book out below:</p>
+<button><a href='/checkout/{{book.id}}'>Check This Book Out</a></button>
+{% endif %}
+{%if book.copies_available == 0 and book not in request.user.checked_out_books.all%}
 <p>This book is currently unavailable, you can reserve below:</p>
 {%if book in request.user.reserved_books.all%}
 <p>You have already reserved this.<p>
