@@ -1,0 +1,16 @@
+<ul>
+    <li>username: {{profiles.username}}</li>
+    <li>Checkout Books: {{profiles.checked_out_books}}</li>
+    <li>Card Number: {{profiles.library_card_number}}</li>
+    
+
+
+</ul>
+
+{% for book in books %}
+<div>
+    <p>Title: {{book.title}}</p>
+    <p>Author:{{book.author}}</p>
+    <p>Available Copies: {{book.copies_available}}</p>
+  </div>
+{% endfor %}

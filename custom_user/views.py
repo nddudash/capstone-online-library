@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import render, HttpResponseRedirect, reverse
+from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
 
@@ -7,7 +8,10 @@ from django.contrib.auth import login, authenticate,  logout
 
 
 # Create your views here.
-
+def user_profile_view(request,id):
+  profiles = CustomUser.objects.get(id=id)
+  books = Book.objects.all()
+  return render(request, 'profile.html', {'profiles': profiles, 'books': books})
 
 def login_view(request):
     if request.method == "POST":
