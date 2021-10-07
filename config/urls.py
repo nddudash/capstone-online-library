@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from book.views import book_add_search_view, book_add_commit_view, book_detail
 from custom_user.views import login_view, logout_view, sign_up_view
+from reservations.views import reservation_view
 from book import views
 
 urlpatterns = [
@@ -28,4 +29,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('sign_up/', sign_up_view, name='sign_up'),
     path('book_list/', views.BookList_view, name='book_list'),
+    path('reserve/<int:id>/', reservation_view, name='reserve')
 ]
