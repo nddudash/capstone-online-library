@@ -1,6 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href={% static "book/main.css" %}>
 
+{% include "nav.html" %}
 
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
