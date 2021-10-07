@@ -22,14 +22,14 @@ def login_view(request):
                 request, username=data['username'], password=data['password'])
             if user:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', reverse('book_list')))
+                return HttpResponseRedirect(request.GET.get('next', reverse('books_page')))
     forms = UserForm()
     return render(request, 'generic.html', {"forms": forms})
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(request.GET.get('next', reverse('book_list')))
+    return HttpResponseRedirect(request.GET.get('next', reverse('books_page')))
 
 
 def sign_up_view(request):
@@ -44,9 +44,9 @@ def sign_up_view(request):
             if new_user:
                 login(request, new_user)
                 return HttpResponseRedirect(
-                    request.GET.get("next", reverse("book_list"))
+                    request.GET.get("next", reverse('books_page'))
                 )
-            return HttpResponseRedirect(reverse("book_list"))
+            return HttpResponseRedirect(reverse('books_page'))
     else:
 
         forms = UserForm()
