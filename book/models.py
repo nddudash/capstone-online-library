@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Book(models.Model):
-    text = models.TextField(max_length=1500)
+    text = models.UrlField(max_length=1500)
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     copies_available = models.PositiveIntegerField(default=2)

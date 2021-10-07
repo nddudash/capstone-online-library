@@ -77,6 +77,6 @@ def book_add_commit_view(request, id):
         return HttpResponse("You've added a book")
 
 
-def BookList_view(request):
+def bookList_view(request):
     books = Book.objects.all()
     return render(request, 'all_books.html', {'books': books})
