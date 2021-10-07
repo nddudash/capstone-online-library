@@ -8,7 +8,7 @@
 {%if book in request.user.checked_out_books.all%}
 <p>You already have this book checked out.</p>
 {%elif book.copies_available and book not in request.user.checked_out_books.all%}
-<p>You can check a copy of this book out below:</p>
+<p>You can check out a copy of this book out below:</p>
 <button><a href='/checkout/{{book.id}}'>Check This Book Out</a></button>
 {% endif %}
 {%if book.copies_available == 0 and book not in request.user.checked_out_books.all%}
