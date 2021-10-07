@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from book.views import book_add_search_view, book_add_commit_view, book_detail
+from book.views import book_add_search_view, book_add_commit_view, book_detail, BookList_view
 from custom_user.views import login_view, logout_view, sign_up_view
 from book import views
 from checkout.views import checkout_book_view, return_book_view
@@ -24,11 +24,11 @@ urlpatterns = [
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
     path('books/add/', book_add_search_view, name='AddBookView'),
     path('admin/', admin.site.urls),
-    path('bookdetail/<int:id>/', book_detail, name='bookdetail'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('sign_up/', sign_up_view, name='sign_up'),
-    path('book_list/', views.BookList_view, name='book_list'),
+    path('book_detail/<int:id>/', book_detail, name='book_detail_page'),
+    path('login_view/', login_view, name='login_view'),
+    path('logout_view/', logout_view, name='logout'),
+    path('sign_up_view/', sign_up_view, name='sign_up'),
+    path('all_books/', views.BookList_view, name='books_page'),
     path('checkout/<int:book_id>/', checkout_book_view, name='checkout'),
     path('return/<int:book_id>/', return_book_view, name='return'),
 ]

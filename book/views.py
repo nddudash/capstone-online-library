@@ -79,4 +79,4 @@ def book_add_commit_view(request, id):
 
 def BookList_view(request):
     books = Book.objects.all()
-    return render(request, 'book_list.html', {'books': books})
+    return render(request, 'all_books.html', {'books': books})
