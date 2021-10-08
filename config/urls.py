@@ -25,7 +25,7 @@ urlpatterns = [
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
     path('books/add/', book_add_search_view, name='AddBookView'),
     path('admin/', admin.site.urls),
-    path('reserve/<int:id>/', reservation_view, name='reserve')
+    path('reserve/<int:id>/', reservation_view, name='reserve'),
     path('book_detail/<int:id>/', book_detail, name='book_detail_page'),
     path('login_view/', login_view, name='login_view'),
     path('logout_view/', logout_view, name='logout'),
