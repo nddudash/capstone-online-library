@@ -134,3 +134,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'custom_user.CustomUser'
+
+# Login Redirect Field
+# TODO: Change to Home Page
+LOGIN_REDIRECT_URL = '/all_books/'
+
+# Login URL
+LOGIN_URL = "/login_view/"

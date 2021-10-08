@@ -13,9 +13,8 @@ https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
       <li><a href="/sign_up_view/">Sign Up</a></li>
       {% elif request.user.is_authenticated %} {% comment %}
       <li><a href="/notifications/{{user.id}}">Notifications</a></li>
-      {% endcomment %} {% comment %}
-      <li><a href="/users/{{user.id}}">Profile</a></li>
       {% endcomment %}
+      <li><a href="/profile/{{request.user.id}}">Profile</a></li>
       <li><a href="/logout_view">Logout</a></li>
       {% endif %}
     </ul>

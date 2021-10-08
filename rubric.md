@@ -1,7 +1,7 @@
-- [ ] 6 pts. - At least Three (3) Class Based Views
-    - [ ] 
-    - [ ] 
-    - [ ] 
+- [x] 6 pts. - At least Three (3) Class Based Views
+    - [x] - LoginView
+    - [x] - LogoutView
+    - [x] - FormView
 - [x] 6 pts. - Secrets are not commits to the Repo. Use a .env file!
 - [ ] 6 pts. - All Network Requests have sufficient Exception Handling for 4xx and 5xx responses
 - [ ] 6 pts. - DRY. Don't Repeat Yourself! Any repetitive code should be abstracted to a helper function!
@@ -15,7 +15,6 @@
     - [x] .all()
     - [x] .get()
     - [x] .filter() 
-
 - [ ] 5pts. - Include at least Five (5) different Field types across your models, NOT INCLUDING relationship fields!
     - [x] - CharField 
     - [x] - UrlField
