@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from book.templatetags.book_extras import get_readable
 from book.models import Book
 from book.forms import BookSearchForm
+from notification.models import Notifications
 
 from book.models import Book
 
@@ -52,8 +53,15 @@ def book_add_commit_view(request, id):
     try:
         book = Book.objects.get(gutenberg_id__exact=id)
 
-        book.copies_available += 1
 
+        book.copies_available += 1
+        if book.is_reserved:
+          notification = Notifications.objects.create(
+            user= book.customuser_set.first(),
+            book= book,
+            exclamation= True,
+          )
+          notification.save()
         book.save()
 
         # TODO: Redirect to Book Detail View
