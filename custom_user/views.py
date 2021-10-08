@@ -1,9 +1,9 @@
 from django.db import models
-from django.shortcuts import render, HttpResponseRedirect, reverse, reverse_lazy
+from django.shortcuts import render, HttpResponseRedirect, reverse
 from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
-
+from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate,  logout
 from django.views.generic.edit import DeleteView
 
