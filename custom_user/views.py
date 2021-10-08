@@ -4,6 +4,7 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
+from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
 
@@ -11,7 +12,10 @@ from django.contrib.auth import login, authenticate,  logout
 
 
 # Create your views here.
-
+def user_profile_view(request,id):
+  profiles = CustomUser.objects.get(id=id)
+  books = Book.objects.all()
+  return render(request, 'profile.html', {'profiles': profiles, 'books': books})
 
 # def login_view(request):
 #     if request.method == "POST":
@@ -54,9 +58,9 @@ def sign_up_view(request):
             if new_user:
                 login(request, new_user)
                 return HttpResponseRedirect(
-                    request.GET.get("next", reverse("book_list"))
+                    request.GET.get("next", reverse('books_page'))
                 )
-            return HttpResponseRedirect(reverse("book_list"))
+            return HttpResponseRedirect(reverse('books_page'))
     else:
 
         form = UserForm()
