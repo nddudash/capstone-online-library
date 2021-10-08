@@ -12,3 +12,4 @@ class Notifications(models.Model):
 
     def __str__(self):
             return f"{self.user} reserved {self.book}. Exclamation = {self.exclamation}"
+

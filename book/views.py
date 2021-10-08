@@ -1,13 +1,15 @@
+from django.contrib.auth.models import User
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.core.exceptions import ObjectDoesNotExist
 from book.templatetags.book_extras import get_readable
-from django.contrib.auth.decorators import login_required
+from book.models import Book, Comment
+from book.forms import BookSearchForm, CommentForm
+
 from book.models import Book
-from book.forms import BookSearchForm
-from notification.models import Notifications
-from book.models import Book
+from custom_user.forms import UserForm
+from custom_user.models import CustomUser
 
 # Create your views here.
 
@@ -50,20 +52,13 @@ def book_add_search_view(request):
     return render(request, 'book/book_search_and_add.html', context)
 
 
-@login_required
 def book_add_commit_view(request, id):
 
     try:
         book = Book.objects.get(gutenberg_id__exact=id)
 
         book.copies_available += 1
-        if book.is_reserved:
-            notification = Notifications.objects.create(
-                user=book.customuser_set.first(),
-                book=book,
-                exclamation=True,
-            )
-            notification.save()
+
         book.save()
 
         # TODO: Redirect to Book Detail View
@@ -87,6 +82,36 @@ def book_add_commit_view(request, id):
         return HttpResponse("You've added a book")
 
 
-def book_list_view(request):
+def BookList_view(request):
     books = Book.objects.all()
     return render(request, 'all_books.html', {'books': books})
+
+
+def edit_user_view(request, edit_id):
+    form = CustomUser.objects.get(id=edit_id)
+    if request.method == 'POST':
+        info = UserForm(request.POST)
+        if info.is_valid():
+            data = info.cleaned_data
+            form.username = data['username']
+            form.password = data['password']
+            form.save()
+            return HttpResponseRedirect('home')
+    forms = UserForm(
+        initial={'username': form.username, 'password': form.password})
+    return render(request, 'generic.html', {'forms': forms})
+
+
+def comment_view(request, pk):
+    post = get_object_or_404(Book, pk=pk)
+    if request.method == 'POST':
+        comments = CommentForm(request.POST)
+        if comments.is_valid():
+            comment = comments.save(active=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return HttpResponseRedirect('home')
+        else:
+            form = CommentForm()
+            return render(request, 'generic.html', {'form': form, 'comments': comments})

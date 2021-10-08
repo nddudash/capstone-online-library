@@ -22,3 +22,14 @@
 {% endif %}
 </div>
 
+{% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ comment.user }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.time_created }}
+            </span>
+          </p>
+          {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
