@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from book.views import book_add_search_view, book_add_commit_view, book_detail, book_list_view, index_view, comment_view
+from book.views import BookList_view, book_add_search_view, book_add_commit_view, book_detail, index_view, comment_view
 from custom_user.views import LoginView, LogoutView, SignUpView, user_profile_view, edit_user_view, CustomUserDeleteView
 from reservations.views import reservation_view
 from checkout.views import checkout_book_view, return_book_view
@@ -33,7 +33,7 @@ urlpatterns = [
     path('login_view/', LoginView.as_view(), name='login'),
     path('logout_view/', LogoutView.as_view(), name='logout'),
     path('sign_up_view/', SignUpView.as_view(), name='sign_up'),
-    path('all_books/', book_list_view, name='books_page'),
+    path('all_books/', BookList_view, name='books_page'),
     path('checkout/<int:book_id>/', checkout_book_view, name='checkout'),
     path('return/<int:book_id>/', return_book_view, name='return'),
     path('edit/<int:edit_id>/', edit_user_view, name='edit'),
