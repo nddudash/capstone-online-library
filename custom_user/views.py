@@ -1,10 +1,11 @@
 from django.db import models
-from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.shortcuts import render, HttpResponseRedirect, reverse, reverse_lazy
 from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
 
 from django.contrib.auth import login, authenticate,  logout
+from django.views.generic.edit import DeleteView
 
 
 # Create your views here.
@@ -51,3 +52,7 @@ def sign_up_view(request):
 
         forms = UserForm()
     return render(request, 'generic.html', {"forms": forms})
+
+class AuthorDeleteView(DeleteView):
+    model = CustomUser
+    success_url = reverse_lazy('author-list')
