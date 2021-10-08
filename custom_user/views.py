@@ -55,4 +55,4 @@ def sign_up_view(request):
 
 class AuthorDeleteView(DeleteView):
     model = CustomUser
-    success_url = reverse_lazy('author-list')
+    success_url = reverse_lazy('custom_user-list')
