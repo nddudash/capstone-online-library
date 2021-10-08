@@ -3,19 +3,26 @@ import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.core.exceptions import ObjectDoesNotExist
-from book.templatetags.book_extras import get_readable
 from book.models import Book, Comment
 from book.forms import BookSearchForm, CommentForm
-
-from book.models import Book
 from custom_user.forms import UserForm
+from book.templatetags.book_extras import get_readable, get_image
+from django.contrib.auth.decorators import login_required
+from notification.models import Notifications
 from custom_user.models import CustomUser
 
 # Create your views here.
 
 
+def index_view(request):
+    template_name = 'index.html'
+    book = Book.objects.all()
+    context = {"book": book}
+    return render(request, template_name, context)
+
+
 def book_detail(request, id):
-    template_name = 'book_detail.html'
+    template_name = 'book/book_detail.html'
     book = Book.objects.get(id=id)
     context = {'book': book}
     return render(request, template_name, context)
@@ -74,6 +81,7 @@ def book_add_commit_view(request, id):
             author=data["authors"][0]["name"],
             copies_available=1,
             text=get_readable(data["formats"]),
+            image_url=get_image(data["formats"])
         )
 
         new_book.save()
@@ -115,3 +123,5 @@ def comment_view(request, pk):
         else:
             form = CommentForm()
             return render(request, 'generic.html', {'form': form, 'comments': comments})
+    # return render(request, 'book/all_books.html', {'books': books})
+    # redirect here
