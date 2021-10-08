@@ -20,5 +20,5 @@
     - [x] - UrlField
     - [x] - PositiveIntegerField 
     - [x] - IntegerField 
-    - [ ] 
+    - [x] - BooleanField
 - [x] 5 pts. - At least one view has additional arguments passed in via the URL path. (URL params or the path's kwargs arguments?)

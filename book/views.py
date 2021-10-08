@@ -90,16 +90,3 @@ def book_add_commit_view(request, id):
 def bookList_view(request):
     books = Book.objects.all()
     return render(request, 'all_books.html', {'books': books})
-
-def edit_user_view(request, edit_id):
-    form = CustomUser.objects.get(id=edit_id)
-    if request.method == 'POST':
-        info = UserForm(request.POST)
-        if info.is_valid():
-            data = info.cleaned_data
-            form.username = data['username']
-            form.password = data['password']
-            form.save()
-            return HttpResponseRedirect('home')
-    forms = UserForm(initial={'username': form.username, 'password': form.password})
-    return render(request, 'generic.html', {'forms': forms})

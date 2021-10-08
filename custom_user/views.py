@@ -96,3 +96,18 @@ class SignUpView(FormView):
 
     def form_invalid(self, form):
         return render(self.request, self.template_name, {"form": form, 'header': 'Signup'})
+
+
+def edit_user_view(request, edit_id):
+    form = CustomUser.objects.get(id=edit_id)
+    if request.method == 'POST':
+        info = UserForm(request.POST)
+        if info.is_valid():
+            data = info.cleaned_data
+            form.username = data['username']
+            form.password = data['password']
+            form.save()
+            return HttpResponseRedirect('home')
+    forms = UserForm(
+        initial={'username': form.username, 'password': form.password})
+    return render(request, 'generic.html', {'forms': forms})
