@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from book.views import book_add_search_view, book_add_commit_view, book_detail, BookList_view
-from custom_user.views import login_view, logout_view, sign_up_view
+from custom_user.views import login_view, logout_view, sign_up_view, user_profile_view
+from reservations.views import reservation_view
 from book import views
 from checkout.views import checkout_book_view, return_book_view
 
@@ -24,6 +25,7 @@ urlpatterns = [
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
     path('books/add/', book_add_search_view, name='AddBookView'),
     path('admin/', admin.site.urls),
+    path('reserve/<int:id>/', reservation_view, name='reserve'),
     path('book_detail/<int:id>/', book_detail, name='book_detail_page'),
     path('login_view/', login_view, name='login_view'),
     path('logout_view/', logout_view, name='logout'),
@@ -32,5 +34,5 @@ urlpatterns = [
     path('checkout/<int:book_id>/', checkout_book_view, name='checkout'),
     path('return/<int:book_id>/', return_book_view, name='return'),
     path('edit/<int:edit_id>/', views.edit_user_view, name='edit'),
-
+    path('profile/<int:id>/', user_profile_view, name='profile_page'),
 ]
