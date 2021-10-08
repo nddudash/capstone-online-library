@@ -33,5 +33,6 @@ urlpatterns = [
     path('all_books/', bookList_view, name='books_page'),
     path('checkout/<int:book_id>/', checkout_book_view, name='checkout'),
     path('return/<int:book_id>/', return_book_view, name='return'),
+    path('edit/<int:edit_id>/', views.edit_user_view, name='edit'),
     path('profile/<int:id>/', user_profile_view, name='profile_page'),
 ]
