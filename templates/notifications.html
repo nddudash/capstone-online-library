@@ -1,0 +1,7 @@
+{% load notification_extras %}
+{% include "nav.html" %}
+
+{% for each in notifications%}
+<h2>Your book {{each.book.title}} is ready for check out.</h2>
+<h3>Click <button><a href='/checkout/{{each.book.id}}'>Here</a></button></h3>
+{% endfor %}

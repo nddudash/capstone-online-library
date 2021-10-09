@@ -20,7 +20,7 @@ from book.views import BookList_view, book_add_search_view, book_add_commit_view
 from custom_user.views import LoginView, LogoutView, SignUpView, user_profile_view, edit_user_view, CustomUserDeleteView
 from reservations.views import reservation_view
 from checkout.views import checkout_book_view, return_book_view
-
+from notification.views import notifications_view, no_nots_view
 urlpatterns = [
     path('', index_view, name="homepage"),
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('reserve/<int:id>/', reservation_view, name='reserve'),
     path('book_detail/<int:id>/', book_detail, name='book_detail_page'),
+    path('notifications/<int:user_id>/', notifications_view, name='notification'),
+    path('nonots/', no_nots_view, name='no_nots'),
     # Make sure the login URL is consistent with the LOGIN_URL in settings.py!
     path('login_view/', LoginView.as_view(), name='login'),
     path('logout_view/', LogoutView.as_view(), name='logout'),

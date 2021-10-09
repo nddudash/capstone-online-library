@@ -1,15 +1,16 @@
+{% extends "base.html" %}
 {% load static %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}" />
-
-{% include "nav.html" %}
-
-{% if header %}
-<h1>{{header}}</h1>
-{% endif %}
-
-<div id="content">
+{% block content %}
+<div>
+  {% include "nav.html" %}
+  {% if header %}
+  <h1>{{header}}</h1>
+  {% endif %}
   <form method="post" id="login-form">
     {% csrf_token %} {{ form.as_p }}
     <button id="login-btn" type="submit">Submit</button>
   </form>
 </div>
+{% endblock %}
