@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.utils.decorators import method_decorator
 from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
@@ -53,6 +55,12 @@ def sign_up_view(request):
         forms = UserForm()
     return render(request, 'generic.html', {"forms": forms})
 
-class AuthorDeleteView(DeleteView):
+class CustomUserDeleteView(DeleteView):
     model = CustomUser
-    success_url = reverse_lazy('custom_user-list')
+    def get_success_url(self):
+        return reverse('login_view')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CustomUserDeleteView, self).dispatch(request, *args, **kwargs)
+    
