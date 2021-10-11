@@ -1,8 +1,9 @@
-import requests
 import os
+import tempfile
+import requests
 from PIL import Image
 from django.db import models
-from django.core.files import File
+from django.core.files.images import ImageFile
 from requests.sessions import default_headers
 
 # Create your models here.
@@ -25,10 +26,35 @@ class Book(models.Model):
         return f"{self.title}, ({self.copies_available})"
 
     def get_remote_image(self):
-        if self.image_url and not self.image_file:
-            result = requests.get(self.image_url)
+        # CITATION - https://stackoverflow.com/questions/16174022/download-a-remote-image-and-save-it-to-a-django-model
+        # Serious big ups to rockingskier, this is clean and simple code.
+        if self.image_url and self.image_file == 'placeholder.jpg':
+            # Stream Image from URL
+            result = requests.get(self.image_url, stream=True)
+
+            # TODO: Add some sort of error handling here
+            # if result.status_code != requests.codes.ok:
+            # continue
+
+            file_name = f"{self.title[:10]}.{self.gutenberg_id}.{self.image_url.split('/')[-1]}"
+
+            # Create a Temporary File
+            temp = tempfile.NamedTemporaryFile()
+
+            # Read Streamed image in chunks
+            for chunk in result.iter_content(1024 * 8):
+                if not chunk:
+                    break
+
+                temp.write(chunk)
+
             self.image_file.save(
-                os.path.basename(self.image_url),
-                File(open(result[0]))
+                file_name,
+                temp
             )
+
             self.save()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.get_remote_image()

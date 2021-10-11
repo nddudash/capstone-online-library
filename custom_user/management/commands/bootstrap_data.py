@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 author="Shelley, Mary Wollstonecraft",
                 copies_available=4,
                 text="https://www.gutenberg.org/files/84/84-h.zip",
-                # img = "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg"
+                image_url = "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg"
             )
 
             Book.objects.create(
@@ -63,7 +63,7 @@ class Command(BaseCommand):
                 author="Swift, Jonathan",
                 copies_available=1,
                 text="https://www.gutenberg.org/files/1080/1080-h/1080-h.htm",
-                # img = "https://www.gutenberg.org/cache/epub/1080/pg1080.cover.small.jpg"
+                image_url = "https://www.gutenberg.org/cache/epub/1080/pg1080.cover.small.jpg"
             )
 
             Book.objects.create(
@@ -72,7 +72,7 @@ class Command(BaseCommand):
                 author="Headley, Rowland George Allanson-Winn, Baron",
                 copies_available=2,
                 text="https://www.gutenberg.org/files/31214/31214-h/31214-h.htm",
-                # img = "https://www.gutenberg.org/cache/epub/31214/pg31214.cover.small.jpg"
+                image_url = "https://www.gutenberg.org/cache/epub/31214/pg31214.cover.small.jpg"
             )
 
             Book.objects.create(
@@ -81,7 +81,7 @@ class Command(BaseCommand):
                 author="Noguchi, Yoné",
                 copies_available=0,
                 text="https://www.gutenberg.org/files/63256/63256-h/63256-h.htm",
-                # img = "https://www.gutenberg.org/cache/epub/63256/pg63256.cover.small.jpg"
+                image_url = "https://www.gutenberg.org/cache/epub/63256/pg63256.cover.small.jpg"
             )
 
             Book.objects.create(
@@ -90,7 +90,7 @@ class Command(BaseCommand):
                 author="Wells, H. G. (Herbert George)",
                 copies_available=0,
                 text="https://www.gutenberg.org/files/27365/27365-h/27365-h.htm",
-                # img = "https://www.gutenberg.org/cache/epub/27365/pg27365.cover.medium.jpg"
+                image_url = "https://www.gutenberg.org/cache/epub/27365/pg27365.cover.medium.jpg"
             )
 
             Book.objects.create(
@@ -99,7 +99,7 @@ class Command(BaseCommand):
                 author="Carroll, Lewis",
                 copies_available=3,
                 text="https://www.gutenberg.org/files/11/11-h/11-h.htm",
-                # img = "https://www.gutenberg.org/cache/epub/11/pg11.cover.medium.jpg"
+                image_url = "https://www.gutenberg.org/cache/epub/11/pg11.cover.medium.jpg"
             )
 
             self.stdout.write(self.style.SUCCESS(

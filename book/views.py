@@ -2,7 +2,7 @@ import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
-from book.templatetags.book_extras import get_readable
+from book.templatetags.book_extras import get_readable, get_image
 from django.contrib.auth.decorators import login_required
 from book.models import Book
 from book.forms import BookSearchForm
@@ -16,6 +16,7 @@ from custom_user.models import CustomUser
 def book_detail(request, id):
     template_name = 'book/book_detail.html'
     book = Book.objects.get(id=id)
+    print(book.image_file == 'placeholder.jpg')
     user = CustomUser.objects.get(id = request.user.id)
     context = {'book': book, 'user': user}
     return render(request, template_name, context)
@@ -81,6 +82,7 @@ def book_add_commit_view(request, id):
             author=data["authors"][0]["name"],
             copies_available=1,
             text=get_readable(data["formats"]),
+            image_url=get_image(data["formats"])
         )
 
         new_book.save()
