@@ -5,6 +5,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
 from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
@@ -61,8 +62,10 @@ class SignUpView(FormView):
         return render(self.request, self.template_name, {"form": form, 'header': 'Signup'})
 
 
+@login_required
 def edit_user_view(request, edit_id):
-    form = CustomUser.objects.get(id=edit_id)
+    form = UserForm
+    user = CustomUser.objects.get(id=edit_id)
     if request.method == 'POST':
         info = UserForm(request.POST)
         if info.is_valid():
@@ -70,10 +73,11 @@ def edit_user_view(request, edit_id):
             form.username = data['username']
             form.password = data['password']
             form.save()
-            return HttpResponseRedirect('home')
-    forms = UserForm(
-        initial={'username': form.username, 'password': form.password})
-    return render(request, 'generic.html', {'forms': forms})
+            # TODO: Redirect to Home!
+            return HttpResponseRedirect('all_books')
+    form = UserForm(
+        initial={'username': user.username, 'password': user.password})
+    return render(request, 'generic.html', {'form': form, 'header': 'Edit Account'})
 
 
 # Keeping the non-generic views as comments just in case

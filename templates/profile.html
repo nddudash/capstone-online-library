@@ -3,13 +3,26 @@
 <ul>
   <li>username: {{profiles.username}}</li>
   <li>Card Number: {{profiles.library_card_number}}</li>
-  <li>Checkout Books: {{profiles.checked_out_books.all}}</li>
+  {% if profiles.checked_out_books.all %}
+  <li>Checked Out Books: {{profiles.checked_out_books.all}}</li>
+  {% endif%}
 </ul>
 
+{% if profiles.checked_out_books.all %}
 {% for book in profiles.checked_out_books.all %}
+{% comment %} TODO: Replace with Consistent Book Card {% endcomment %}
 <div>
+  <h2>Checked Out Books</h2>
   <p>Title: {{book.title}}</p>
   <p>Author:{{book.author}}</p>
   <p>Available Copies: {{book.copies_available}}</p>
+  <button onclick="window.location.href='/return/{{book.id}}'">Return Book</button>
 </div>
 {% endfor %}
+{% endif%}
+
+{% if profiles.id == request.user.id %}
+<button onclick = "window.location.href='/eidt/{{request.user.id}}">
+  Edit Account Information
+</button>
+{% endif %}
