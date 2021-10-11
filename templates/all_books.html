@@ -2,8 +2,8 @@
 
 {% for book in books %}
 <ul>
+  <li><a href="/book_detail/{{book.id}}">{{book.title}}</a></li>
   <li>{{book.author}}</li>
-  <li>{{book.title}}</li>
   <li>{{book.text}}</li>
   <li>{{book.copies_available}}</li>
 </ul>

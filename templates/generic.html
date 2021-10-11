@@ -1,7 +1,10 @@
-{% include "nav.html" %}
+{% include "nav.html" %} 
+
+{% if header %}
+<h1>{{header}}</h1>
+{% endif %}
 
 <form method="post">
-  {% csrf_token %}
-  {{ forms.as_p }}
-  <button type="submit">Log In</button>
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Submit</button>
 </form>

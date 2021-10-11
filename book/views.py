@@ -1,20 +1,22 @@
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from book.templatetags.book_extras import get_readable
+from django.contrib.auth.decorators import login_required
 from book.models import Book
 from book.forms import BookSearchForm
 from notification.models import Notifications
-
 from book.models import Book
 
 # Create your views here.
-def book_detail(request,id):
-  template_name = 'book_detail.html'
-  book = Book.objects.get(id=id)
-  context = {'book': book}
-  return render(request, template_name, context)
+
+
+def book_detail(request, id):
+    template_name = 'book_detail.html'
+    book = Book.objects.get(id=id)
+    context = {'book': book}
+    return render(request, template_name, context)
 
 
 def book_add_search_view(request):
@@ -48,20 +50,20 @@ def book_add_search_view(request):
     return render(request, 'book/book_search_and_add.html', context)
 
 
+@login_required
 def book_add_commit_view(request, id):
 
     try:
         book = Book.objects.get(gutenberg_id__exact=id)
 
-
         book.copies_available += 1
         if book.is_reserved:
-          notification = Notifications.objects.create(
-            user= book.customuser_set.first(),
-            book= book,
-            exclamation= True,
-          )
-          notification.save()
+            notification = Notifications.objects.create(
+                user=book.customuser_set.first(),
+                book=book,
+                exclamation=True,
+            )
+            notification.save()
         book.save()
 
         # TODO: Redirect to Book Detail View
@@ -85,6 +87,6 @@ def book_add_commit_view(request, id):
         return HttpResponse("You've added a book")
 
 
-def BookList_view(request):
+def book_list_view(request):
     books = Book.objects.all()
     return render(request, 'all_books.html', {'books': books})
