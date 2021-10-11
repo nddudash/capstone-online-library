@@ -143,3 +143,7 @@ LOGIN_REDIRECT_URL = '/all_books/'
 
 # Login URL
 LOGIN_URL = "/login_view/"
+
+# Registering Paths to store User Uploaded Images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

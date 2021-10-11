@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from book.views import book_add_search_view, book_add_commit_view, book_detail, book_list_view
 from custom_user.views import LoginView, LogoutView, SignUpView, user_profile_view, edit_user_view, CustomUserDeleteView
 from reservations.views import reservation_view
@@ -36,4 +38,4 @@ urlpatterns = [
     path('edit/<int:edit_id>/', edit_user_view, name='edit'),
     path('profile/<int:id>/', user_profile_view, name='profile_page'),
     path('delete_user/<int:pk>/', CustomUserDeleteView.as_view(), name='delete_user'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
