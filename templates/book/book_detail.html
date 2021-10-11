@@ -6,7 +6,7 @@
 <p>Author:{{book.author}}</p>
 <p>Available Copies: {{book.copies_available}}</p>
 {%if book in request.user.checked_out_books.all%}
-<p>You already have this book checked out.</p>
+<a href={{book.text}}>{{book.text}}</a><br>
 <button onclick="window.location.href='/return/{{book.id}}'">Return Book</button>
 {%elif book.copies_available and book not in request.user.checked_out_books.all%}
 <p>You can check out a copy of this book out below:</p>

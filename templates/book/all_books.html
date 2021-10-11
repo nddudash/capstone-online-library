@@ -4,7 +4,9 @@
 <ul>
   <li><a href="/book_detail/{{book.id}}">{{book.title}}</a></li>
   <li>{{book.author}}</li>
-  <li>{{book.text}}</li>
+  {%if book in user.checked_out_books.all%}
+  <li><a href={{book.text}}>{{book.text}}</a></li>
+  {% endif %}
   <li>{{book.copies_available}}</li>
 </ul>
 {% endfor %}
