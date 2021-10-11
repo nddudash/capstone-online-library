@@ -57,10 +57,10 @@ def sign_up_view(request):
 
 class CustomUserDeleteView(DeleteView):
     model = CustomUser
+    template_name = "customuser_confirm_delete.html"
     def get_success_url(self):
         return reverse('login_view')
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(CustomUserDeleteView, self).dispatch(request, *args, **kwargs)
-    
