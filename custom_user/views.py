@@ -10,7 +10,7 @@ from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
 
-from django.contrib.auth import login, authenticate,  logout
+from django.contrib.auth import login, authenticate,  logout, update_session_auth_hash
 
 
 # Create your views here.
@@ -70,13 +70,17 @@ def edit_user_view(request, edit_id):
         info = UserForm(request.POST)
         if info.is_valid():
             data = info.cleaned_data
-            form.username = data['username']
-            form.password = data['password']
-            form.save()
+            user.username = data['username']
+            user.password = make_password(data['password'])
+            user.save()
+            # CITATION - https://stackoverflow.com/questions/30821795/django-user-logged-out-after-password-change
+            update_session_auth_hash(request, user)
             # TODO: Redirect to Home!
-            return HttpResponseRedirect('all_books')
+            return redirect(reverse('books_page'))
+
     form = UserForm(
         initial={'username': user.username, 'password': user.password})
+
     return render(request, 'generic.html', {'form': form, 'header': 'Edit Account'})
 
 
