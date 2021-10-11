@@ -90,7 +90,7 @@ class CustomUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'customuser_confirm_delete.html'
     login_url = 'login_view'
     def get_success_url(self):
-        return (reverse('login_view'))
+        return (reverse('login'))
 
 
 # Keeping the non-generic views as comments just in case
