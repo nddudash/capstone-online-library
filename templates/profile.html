@@ -22,7 +22,7 @@
 {% endif%}
 
 {% if profiles.id == request.user.id %}
-<button onclick = "window.location.href='/eidt/{{request.user.id}}">
+<button onclick = "window.location.href='/edit/{{request.user.id}}'">
   Edit Account Information
 </button>
 <a href="/delete_user/{{profiles.pk}}">Delete Account</a>
