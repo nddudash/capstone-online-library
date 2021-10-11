@@ -8,14 +8,16 @@ from book.models import Book
 from book.forms import BookSearchForm
 from notification.models import Notifications
 from book.models import Book
+from custom_user.models import CustomUser
 
 # Create your views here.
 
 
 def book_detail(request, id):
-    template_name = 'book_detail.html'
+    template_name = 'book/book_detail.html'
     book = Book.objects.get(id=id)
-    context = {'book': book}
+    user = CustomUser.objects.get(id = request.user.id)
+    context = {'book': book, 'user': user}
     return render(request, template_name, context)
 
 
@@ -89,4 +91,4 @@ def book_add_commit_view(request, id):
 
 def book_list_view(request):
     books = Book.objects.all()
-    return render(request, 'all_books.html', {'books': books})
+    return render(request, 'book/all_books.html', {'books': books})
