@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.shortcuts import render, HttpResponseRedirect, reverse
-from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
@@ -55,12 +55,14 @@ def sign_up_view(request):
         forms = UserForm()
     return render(request, 'generic.html', {"forms": forms})
 
-class CustomUserDeleteView(DeleteView):
+# CITATION https://stackoverflow.com/questions/5531258/example-of-django-class-based-deleteview
+class CustomUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    def test_func(self):
+        return self.get_object().username == self.request.user.username
     model = CustomUser
     template_name = "customuser_confirm_delete.html"
     def get_success_url(self):
-        return reverse('login_view')
+        return HttpResponseRedirect(reverse('login_view'))
 
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(CustomUserDeleteView, self).dispatch(request, *args, **kwargs)
