@@ -6,7 +6,7 @@ from book.models import Book
 # Create your models here.
 
 class Notifications(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book_notified')
     exclamation = models.BooleanField(default=False)
 

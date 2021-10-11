@@ -56,13 +56,15 @@ def sign_up_view(request):
     return render(request, 'generic.html', {"forms": forms})
 
 # CITATION https://stackoverflow.com/questions/5531258/example-of-django-class-based-deleteview
+# Needs 403 error handling if user being deleted is not the current, signed in user
 class CustomUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.get_object().username == self.request.user.username
     model = CustomUser
-    template_name = "customuser_confirm_delete.html"
+    template_name = 'customuser_confirm_delete.html'
+    login_url = 'login_view'
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('login_view'))
+        return (reverse('login_view'))
 
     def dispatch(self, request, *args, **kwargs):
         return super(CustomUserDeleteView, self).dispatch(request, *args, **kwargs)
