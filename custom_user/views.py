@@ -10,14 +10,9 @@ from django.contrib.auth.hashers import make_password
 from book.models import Book
 from custom_user.forms import UserForm
 from custom_user.models import CustomUser
-<<<<<<< HEAD
-
-from django.contrib.auth import login, authenticate,  logout, update_session_auth_hash
-=======
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate,  logout
 from django.views.generic.edit import DeleteView
->>>>>>> main
 
 
 # Create your views here.
@@ -92,12 +87,15 @@ def edit_user_view(request, edit_id):
 
 # CITATION https://stackoverflow.com/questions/5531258/example-of-django-class-based-deleteview
 # Needs 403 error handling if user being deleted is not the current, signed in user
+
+
 class CustomUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.get_object().username == self.request.user.username
     model = CustomUser
     template_name = 'customuser_confirm_delete.html'
     login_url = 'login_view'
+
     def get_success_url(self):
         return (reverse('login'))
 
