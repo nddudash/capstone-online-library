@@ -6,7 +6,7 @@ from notification.models import Notifications
 
 # Create your views here.
 @login_required
-def notifications(request, user_id):
+def notifications_view(request, user_id):
     context = {
         "logged_in": request.user.is_authenticated,
         "user": request.user,

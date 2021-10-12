@@ -15,18 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from book.views import book_add_search_view, book_add_commit_view, book_detail, index_view
 from custom_user.views import login_view, logout_view, sign_up_view
 from book import views
+=======
+from book.views import book_add_search_view, book_add_commit_view, book_detail, book_list_view, index_view
+from custom_user.views import LoginView, LogoutView, SignUpView, user_profile_view, edit_user_view, CustomUserDeleteView
+from reservations.views import reservation_view
+from checkout.views import checkout_book_view, return_book_view
+>>>>>>> devIbe-merge
 
 urlpatterns = [
     path('', index_view, name="homepage"),
     path('books/add/<int:id>', book_add_commit_view, name='AddBookView'),
     path('books/add/', book_add_search_view, name='AddBookView'),
     path('admin/', admin.site.urls),
-    path('bookdetail/<int:id>/', book_detail, name='bookdetail'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('sign_up/', sign_up_view, name='sign_up'),
-    path('book_list/', views.BookList_view, name='book_list'),
+    path('reserve/<int:id>/', reservation_view, name='reserve'),
+    path('book_detail/<int:id>/', book_detail, name='book_detail_page'),
+    # Make sure the login URL is consistent with the LOGIN_URL in settings.py!
+    path('login_view/', LoginView.as_view(), name='login'),
+    path('logout_view/', LogoutView.as_view(), name='logout'),
+    path('sign_up_view/', SignUpView.as_view(), name='sign_up'),
+    path('all_books/', book_list_view, name='books_page'),
+    path('checkout/<int:book_id>/', checkout_book_view, name='checkout'),
+    path('return/<int:book_id>/', return_book_view, name='return'),
+    path('edit/<int:edit_id>/', edit_user_view, name='edit'),
+    path('profile/<int:id>/', user_profile_view, name='profile_page'),
+    path('delete_user/<int:pk>/', CustomUserDeleteView.as_view(), name='delete_user'),
 ]
