@@ -1,7 +1,11 @@
-{% include "nav.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}">
 
-<form method="post">
-  {% csrf_token %}
-  {{ forms.as_p }}
-  <button type="submit">Log In</button>
-</form>
+<div id='content'>
+  <h1>Welcome Back</h1>
+  <form method="post" id='login-form'>
+    {% csrf_token %}
+    {{ forms.as_p }}
+    <button id="login-btn" type="submit">Log In</button>
+  </form>
+</div>

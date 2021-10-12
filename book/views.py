@@ -9,6 +9,13 @@ from book.forms import BookSearchForm
 from book.models import Book
 
 # Create your views here.
+def index_view(request):
+    template_name = 'index.html'
+    book = Book.objects.all()
+    context = {"book": book}
+    return render(request, template_name, context)
+
+
 def book_detail(request,id):
   template_name = 'book_detail.html'
   book = Book.objects.get(id=id)
