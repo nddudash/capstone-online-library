@@ -1,14 +1,4 @@
 {% load static %}
-<<<<<<< HEAD
-<link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}">
-
-<div id='content'>
-  <h1>Welcome Back</h1>
-  <form method="post" id='login-form'>
-    {% csrf_token %}
-    {{ forms.as_p }}
-    <button id="login-btn" type="submit">Log In</button>
-=======
 <link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}" />
 
 {% include "nav.html" %}
@@ -21,6 +11,5 @@
   <form method="post" id="login-form">
     {% csrf_token %} {{ form.as_p }}
     <button id="login-btn" type="submit">Submit</button>
->>>>>>> devIbe-merge
   </form>
 </div>

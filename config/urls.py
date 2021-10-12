@@ -15,16 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< HEAD
-from book.views import book_add_search_view, book_add_commit_view, book_detail, index_view
-from custom_user.views import login_view, logout_view, sign_up_view
-from book import views
-=======
 from book.views import book_add_search_view, book_add_commit_view, book_detail, book_list_view, index_view
 from custom_user.views import LoginView, LogoutView, SignUpView, user_profile_view, edit_user_view, CustomUserDeleteView
 from reservations.views import reservation_view
 from checkout.views import checkout_book_view, return_book_view
->>>>>>> devIbe-merge
 
 urlpatterns = [
     path('', index_view, name="homepage"),
