@@ -23,3 +23,8 @@ def get_readable(mapping):
         readable = mapping.get("text/plain", '')
 
     return readable
+
+
+@register.filter
+def get_image(mapping):
+    return mapping.get("image/jpeg")

@@ -3,9 +3,8 @@
 # database file
 db.sqlite3
 
-# Media Folder
-media/book_covers
-
+# Book Covers
+media/book_covers/
 
 # .env
 .env
