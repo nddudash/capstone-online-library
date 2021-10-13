@@ -1,0 +1,15 @@
+{% load static %}
+<link rel="stylesheet" href={% static "book/main.css" %}>
+
+{% include "nav.html" %}
+
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Search">
+</form>
+
+<div class="results_wrapper">
+    {% for result in results %}
+        {% include "book/book_search_card.html" with result=result%}
+    {% endfor %}
+</div>

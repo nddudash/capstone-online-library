@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin: 2%;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.book-card .book-img {
+  width: 150px;
+  height: 250px;
+}
+
+.book-card .book-img img {
+  width: 150px;
+  height: 250px;
+}
+
+/* TODO: Move these navigation targeting rules to a more appropriate location! */
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(29, 161, 242);
+    width: 100%;
+  }
+
+  .nav-list li {
+    float: left;
+  }
+
+  .nav-list li a {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .nav-list li a:hover {
+    background-color: rgb(14, 146, 227);
+  }
+
+  /* TODO: Give pages overall better look */
+body {
+  display: flex;
+  background: linear-gradient(to right, #5433FF, #20BDFF);
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+  font-family: "Nunito";
+}
+
+#login-btn {
+    width: 100px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;
+    font-family: "Nunito";
+}
+
+button {
+  background-color: #20BDFF;
+  border: unset;
+  color: #fff;
+  align-self: center;
+  margin-top: 15px;
+  transition: background .5s;
+  -webkit-transition: background .5s;
+  font-family: "Nunito";
+}
+
+button:hover{
+  background-color: #5433FF;
+}
+
+/*This is gives the white wrap around box on home and login page. */
+.wrapper{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+/* Along with this */
+#content {
+    background-color: #fff;
+    padding: 30px 15px;
+    border-radius: 10px;
+    width: 45%;
+    height: 300px;
+  }
