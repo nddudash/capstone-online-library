@@ -1,5 +1,6 @@
 {% include "nav.html" %}
-
+<!-- Added Template Extending to this page -->
+{% block profile_card %}
 <ul>
   <li>username: {{profiles.username}}</li>
   <li>Card Number: {{profiles.library_card_number}}</li>
@@ -7,6 +8,7 @@
   <li>Checked Out Books: {{profiles.checked_out_books.all}}</li>
   {% endif%}
 </ul>
+{% endblock %}
 
 {% if profiles.checked_out_books.all %}
 {% for book in profiles.checked_out_books.all %}
