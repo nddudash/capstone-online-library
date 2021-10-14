@@ -1,8 +1,53 @@
-<ul>
-  <li><a href="/book_detail/{{book.id}}">{{book.title}}</a></li>
-  <li>{{book.author}}</li>
-  {%if book in user.checked_out_books.all%}
-  <li><a href={{book.text}}>{{book.text}}</a></li>
-  {% endif %}
-  <li>{{book.copies_available}}</li>
-</ul>
+{% load static %}
+<link rel="stylesheet" href={% static "book/main.css" %}>
+
+<div class="book-card">
+
+  <div class = "book-card-left-column">
+    <div class="book-img">
+      <img src="{{book.image_file.url}}" alt="book pic" />
+    </div>
+  </div>
+
+  <div class = "book-card-right-column">
+
+    <div class="book-title">
+      <p>Title: {{book.title}}</p>
+    </div>
+
+    <div class="book-author">
+      <p>Author: {{book.author}}</p>
+    </div>
+
+    <div class="book-controls">
+      <p>Copies Available: {{book.copies_available}}</p>
+      <div class="book-buttons-wrapper">
+        <ul class="book-buttons-list">
+          {% if book in request.user.checked_out_books.all %}
+          <button onclick="window.location.href='{{book.text}}'">
+            Read Online
+          </button>
+          <button onclick="window.location.href='/return/{{book.id}}'">
+            Return Book
+          </button>
+          {% elif book.copies_available and book not in request.user.checked_out_books.all%}
+          <button onclick="window.location.href='/checkout/{{book.id}}'">
+            Checkout Book
+          </button>
+          {% elif book.copies_available == 0 and book not in request.user.checked_out_books.all%}
+            {% if book in request.user.reserved_books.all %}
+              <button disabled>
+                Reserve Book
+              </button>
+            {% else %}
+              <button onclick = "window.location.href='/reserve/{{book.id}}'">
+                Reserve Book
+              </button>
+            {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -2,11 +2,12 @@
 
 .book-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: left;
   margin: 2%;
   border: 1px solid black;
   padding: 15px;
+  background-color: #fff;
 }
 
 .book-card .book-img {
