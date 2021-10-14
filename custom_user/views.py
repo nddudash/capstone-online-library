@@ -85,7 +85,6 @@ def edit_user_view(request, edit_id):
     return render(request, 'generic.html', {'form': form, 'header': 'Edit Account'})
 
 # CITATION https://stackoverflow.com/questions/5531258/example-of-django-class-based-deleteview
-# Needs 403 error handling if user being deleted is not the current, signed in user
 
 
 class CustomUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
