@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+* {
+  box-sizing: border-box;
+}
 
 .book-card {
   display: flex;
@@ -6,85 +10,159 @@
   justify-content: left;
   margin: 2%;
   border: 1px solid black;
-  padding: 15px;
+  border-radius: 10px;
   background-color: #fff;
+  flex-grow: 1;
+  max-width: 80%;
+  min-width: 80%;
+}
+
+.book-card .right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+  min-height: 100%;
+}
+
+.book-card .right-column .right-header {
+  padding-left: 15px;
+  font-size: 1.25em;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.book-card .right-column .book-author {
+  font-weight: lighter;
+}
+
+.book-card .book-title {
+  font-weight: bold;
+  color: #20bdff;
+}
+
+.book-card .book-title a {
+  text-decoration: none;
+}
+
+.book-card .right-column .right-body {
+  padding-left: 15px;
+  font-size: 1.1em;
+}
+
+.book-card .right-column .right-footer {
+  width: 100%;
+}
+
+.book-card .book-buttons-list {
+  list-style-type: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #20bdff;
+}
+
+.book-buttons-list li {
+  float: left;
+}
+
+.book-buttons-list li button {
+  float: left;
+  font-size: 1.25em;
+}
+
+.book-card .left-column {
+  min-height: 100%;
 }
 
 .book-card .book-img {
-  width: 150px;
-  height: 250px;
+  width: 200px;
+  min-width: 200px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .book-card .book-img img {
-  width: 150px;
-  height: 250px;
+  /* max-width: 100%; */
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  /* justify-self: flex-end; */
 }
 
 /* TODO: Move these navigation targeting rules to a more appropriate location! */
 .nav-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(29, 161, 242);
-    width: 100%;
-  }
-
-  .nav-list li {
-    float: left;
-  }
-
-  .nav-list li a {
-    display: flex;
-    color: white;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-  .nav-list li a:hover {
-    background-color: rgb(14, 146, 227);
-  }
-
-  /* TODO: Give pages overall better look */
-body {
-  display: flex;
-  background: linear-gradient(to right, #5433FF, #20BDFF);
-  justify-content: center;
+  list-style-type: none;
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #20bdff;
+  width: 100%;
+}
+
+.nav-list li {
+  float: left;
+}
+
+.nav-list li a {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav-list li a:hover {
+  background-color: rgb(14, 146, 227);
+}
+
+/* TODO: Give pages overall better look */
+body {
+  background: linear-gradient(to right, #5433ff, #20bdff);
+  margin: 0 auto;
   height: 100vh;
   font-family: "Nunito";
 }
 
-
-#login-btn {
-    width: 100px;  
-    height: 30px;  
-    border: none;  
-    border-radius: 17px;  
-    padding-left: 7px;
-    font-family: "Nunito";
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }
 
-button {
-  background-color: #20BDFF;
-  border: unset;
-  color: #fff;
-  align-self: center;
-  margin-top: 15px;
-  transition: background .5s;
-  -webkit-transition: background .5s;
+#login-btn {
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 17px;
+  padding-left: 7px;
   font-family: "Nunito";
 }
 
-button:hover{
-  background-color: #5433FF;
+button {
+  background-color: #20bdff;
+  border: unset;
+  color: #fff;
+  align-self: center;
+  transition: background 0.5s;
+  -webkit-transition: background 0.5s;
+  font-family: "Nunito";
+}
+
+button:hover {
+  background-color: #5433ff;
 }
 
 /*This is gives the white wrap around box on home and login page. CLASS */
-.wrapper{
+.wrapper {
   height: 100%;
   width: 100%;
   display: flex;
@@ -94,10 +172,15 @@ button:hover{
 }
 /* Along with this ID */
 #content {
-    background-color: #fff;
-    padding: 30px 15px;
-    border-radius: 10px;
-    width: 45%;
-    height: 300px;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px 15px;
+  border-radius: 10px;
+  flex-grow: 2;
+  max-width: 60%;
+  flex-basis: auto;
+  text-align: center;
 }

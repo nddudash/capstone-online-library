@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}" />
 
-  {% block content %}
-  <div>
-    <h2>OverDrive</h2>
-    <button id="login-btn"><a href="/login_view">Login</a></button>
-    <button id="login-btn"><a href="/logout_view">Sign Up</a></button>
-  </div>
-  {% endblock %}
+{% block content %}
+<div>
+  <h2>OverDrive</h2>
+  <button id="login-btn"><a href="/login_view">Login</a></button>
+  <button id="login-btn"><a href="/logout_view">Sign Up</a></button>
+</div>
+{% endblock %}

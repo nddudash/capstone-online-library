@@ -1,8 +1,6 @@
-{% load static %}
-<link rel="stylesheet" href={% static "book/main.css" %}>
+{% extends "base.html" %}
 
-{% include "nav.html" %}
-
+{% block content %}
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Search">
@@ -13,3 +11,4 @@
         {% include "book/book_search_card.html" with result=result%}
     {% endfor %}
 </div>
+{% endblock %}
