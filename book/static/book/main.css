@@ -58,6 +58,7 @@ body {
   font-family: "Nunito";
 }
 
+
 #login-btn {
     width: 100px;  
     height: 30px;  
@@ -82,7 +83,7 @@ button:hover{
   background-color: #5433FF;
 }
 
-/*This is gives the white wrap around box on home and login page. */
+/*This is gives the white wrap around box on home and login page. CLASS */
 .wrapper{
   height: 100%;
   width: 100%;
@@ -91,11 +92,12 @@ button:hover{
   align-items: center;
   text-align: center;
 }
-/* Along with this */
+/* Along with this ID */
 #content {
     background-color: #fff;
     padding: 30px 15px;
     border-radius: 10px;
     width: 45%;
     height: 300px;
-  }
+    text-align: center;
+}

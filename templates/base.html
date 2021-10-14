@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Capstone</title>
+      <link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}" />
+    </head>
+    <body>
+      <div id='content'>
+        {% block content %}
+        {% endblock %}
+      </div>
+      <div>
+
+      </div>
+    </body>
+</html>
