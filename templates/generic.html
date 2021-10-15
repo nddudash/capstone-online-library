@@ -3,7 +3,7 @@
   {% if header %}
   <h1>{{header}}</h1>
   {% endif %}
-  <form method="post" id="login-form">
+  <form method="post" id="login-form" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
     <button id="login-btn" type="submit">Submit</button>
   </form>
