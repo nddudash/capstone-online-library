@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db import models, IntegrityError
 from django.shortcuts import render, HttpResponseRedirect, redirect, reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
@@ -8,7 +9,7 @@ from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.contrib.auth.hashers import make_password
 from book.models import Book
-from custom_user.forms import UserForm
+from custom_user.forms import UserForm, EditUserForm
 from custom_user.models import CustomUser
 from django.contrib.auth import login, authenticate,  logout, update_session_auth_hash
 from django.views.generic.edit import DeleteView
@@ -16,21 +17,24 @@ from django.views.generic.edit import DeleteView
 
 # Create your views here.
 def user_profile_view(request, id):
-    profiles = CustomUser.objects.get(id=id)
-    books = Book.objects.all()
-    return render(request, 'profile.html', {'profiles': profiles, 'books': books})
+    try:
+        profiles = CustomUser.objects.get(id=id)
+        books = Book.objects.all()
+        return render(request, 'profile.html', {'profiles': profiles, 'books': books})
+    except ObjectDoesNotExist:
+        print(request.user)
+        print(request.user.id)
+        return render(request, 'user_error.html')
 
 
 class LoginView(BaseLoginView):
     template_name = "generic.html"
     form = UserForm
-    # TODO: Redirect to Home Page!
     next_page = reverse_lazy('books_page')
     extra_context = {'header': 'Login'}
 
 
 class LogoutView(BaseLogoutView):
-    # TODO: Redirect to Home Page!
     next_page = reverse_lazy('books_page')
 
 
@@ -50,7 +54,6 @@ class SignUpView(FormView):
 
             if new_user:
                 login(self.request, new_user)
-                # TODO: Redirect to Home!
                 return redirect(reverse('books_page'))
 
         except IntegrityError:
@@ -65,24 +68,26 @@ class SignUpView(FormView):
 
 @login_required
 def edit_user_view(request, edit_id):
-    form = UserForm
     user = CustomUser.objects.get(id=edit_id)
     if request.method == 'POST':
-        info = UserForm(request.POST, request.FILES)
-        if info.is_valid():
-            data = info.cleaned_data
-            user.username = data['username']
-            user.password = make_password(data['password'])
-            user.profile_image = data['profile_image']
+        form = EditUserForm(request.POST, request.FILES)
+        print(form.is_valid())
+        if form.is_valid():
+            changed_data = form.changed_data
+            form_data = form.cleaned_data
+            if "username" in changed_data:
+                user.username = form_data["username"]
+            if "password" in changed_data:
+                user.password = make_password(form_data["password"])
+            if "profile_image" in changed_data:
+                user.profile_image = form_data["profile_image"]
             user.save()
-            print(data)
             # CITATION - https://stackoverflow.com/questions/30821795/django-user-logged-out-after-password-change
             update_session_auth_hash(request, user)
-            # TODO: Redirect to Home!
             return redirect(reverse('books_page'))
 
-    form = UserForm(
-        initial={'username': user.username, 'password': user.password, 'profile_image' : user.profile_image})
+    form = EditUserForm(
+        initial={'username': user.username, 'password': user.password, 'profile_image': user.profile_image})
 
     return render(request, 'generic.html', {'form': form, 'header': 'Edit Account'})
 

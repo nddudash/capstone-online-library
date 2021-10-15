@@ -1,14 +1,9 @@
-{% extends "base.html" %}
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}" />
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div>
-  {% include "nav.html" %}
   {% if header %}
   <h1>{{header}}</h1>
   {% endif %}
-  <form method="post" id="login-form">
+  <form method="post" id="login-form" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
     <button id="login-btn" type="submit">Submit</button>
   </form>
