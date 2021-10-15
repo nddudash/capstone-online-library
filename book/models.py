@@ -19,7 +19,7 @@ class Book(models.Model):
     gutenberg_id = models.IntegerField(default=0)
     is_reserved = models.BooleanField(default=False)
     image_file = models.ImageField(
-        upload_to="book_covers", default='placeholder.jpg')
+        upload_to="book_covers", default='/imgs/placeholder.jpg')
     image_url = models.URLField(max_length=1500, blank=True, null=True)
 
     def __str__(self):
@@ -28,7 +28,7 @@ class Book(models.Model):
     def get_remote_image(self):
         # CITATION - https://stackoverflow.com/questions/16174022/download-a-remote-image-and-save-it-to-a-django-model
         # Serious big ups to rockingskier, this is clean and simple code.
-        if self.image_url and self.image_file == 'placeholder.jpg':
+        if self.image_url and self.image_file == '/imgs/placeholder.jpg':
             # Stream Image from URL
             result = requests.get(self.image_url, stream=True)
 

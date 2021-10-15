@@ -83,7 +83,7 @@ def book_add_commit_view(request, id):
         new_book = Book(
             gutenberg_id=data["id"],
             title=data["title"],
-            author=data["authors"][0]["name"],
+            author=data["authors"][0]["name"] if data["authors"] else data["translators"][0]["name"],
             copies_available=1,
             text=get_readable(data["formats"]),
             image_url=get_image(data["formats"])
@@ -97,3 +97,7 @@ def book_add_commit_view(request, id):
 def book_list_view(request):
     books = Book.objects.all()
     return render(request, 'book/all_books.html', {'books': books})
+
+
+def book_subjects_view(request):
+    ...

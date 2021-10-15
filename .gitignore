@@ -6,6 +6,9 @@ db.sqlite3
 # Book Covers
 media/book_covers/
 
+# Profile Pictures
+media/profile_pics/
+
 # .env
 .env
 
