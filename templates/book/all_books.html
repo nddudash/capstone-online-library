@@ -1,6 +1,11 @@
-{% include "nav.html" %} 
+{% extends "base.html" %}
 
+{% block content %}
+<h1 class="content-header">Catalouge</h1>
+
+<div class="book-card-wrapper">
 {% for book in books %}
+<<<<<<< HEAD
 <ul>
   <li><a href="/book_detail/{{book.id}}">{{book.title}}</a></li>
   <li>{{book.author}}</li>
@@ -10,4 +15,9 @@
   <li>{{book.copies_available}}</li>
   <button><a href="/comment/">comment</a></button>
 </ul>
+=======
+  {% include "book/book_detail_card.html" with book=book %}
+>>>>>>> 03f1f0ef385dfd9c2ef6fde8035eaa2023034f1f
 {% endfor %}
+</div>
+{% endblock %}

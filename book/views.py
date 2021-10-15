@@ -1,7 +1,11 @@
 from django.contrib.auth.models import User
 import requests
+<<<<<<< HEAD
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+=======
+from django.shortcuts import render, redirect, reverse
+>>>>>>> 03f1f0ef385dfd9c2ef6fde8035eaa2023034f1f
 from django.core.exceptions import ObjectDoesNotExist
 from book.models import Book, Comment
 from book.forms import BookSearchForm, CommentForm
@@ -9,7 +13,11 @@ from custom_user.forms import UserForm
 from book.templatetags.book_extras import get_readable, get_image
 from django.contrib.auth.decorators import login_required
 from notification.models import Notifications
+<<<<<<< HEAD
 from custom_user.models import CustomUser
+=======
+from book.models import Book
+>>>>>>> 03f1f0ef385dfd9c2ef6fde8035eaa2023034f1f
 
 # Create your views here.
 
@@ -22,11 +30,13 @@ def index_view(request):
 
 
 def book_detail(request, id):
-    template_name = 'book/book_detail.html'
-    book = Book.objects.get(id=id)
-    context = {'book': book}
-    return render(request, template_name, context)
-
+    try:
+        template_name = 'book/book_detail.html'
+        book = Book.objects.get(id=id)
+        context = {'book': book}
+        return render(request, template_name, context)
+    except:
+        return render(request, 'book/book_error.html')
 
 def book_add_search_view(request):
     context = {
@@ -68,8 +78,7 @@ def book_add_commit_view(request, id):
 
         book.save()
 
-        # TODO: Redirect to Book Detail View
-        return HttpResponse("You've added a book")
+        return redirect(reverse("book_detail_page", args={book.id}))
 
     except ObjectDoesNotExist:
         response = requests.get(f'http://gutendex.com/books/{id}')
@@ -86,8 +95,7 @@ def book_add_commit_view(request, id):
 
         new_book.save()
 
-        # TODO: Redirect to Book Detail View
-        return HttpResponse("You've added a book")
+        return redirect(reverse("book_detail_page", args={new_book.id}))
 
 
 def BookList_view(request):

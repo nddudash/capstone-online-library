@@ -1,5 +1,6 @@
-{% include "nav.html" %}
+{% extends "base.html" %}
 
+<<<<<<< HEAD
 <h1>Book Detail</h1>
 <div>
 <p>Title: {{book.title}}</p>
@@ -20,5 +21,15 @@
 <button><a href='/reserve/{{book.id}}'>Reserve This Book</a></button>
 {% endif %}
 {% endif %}
+=======
+{% block content %}
+<h1 class="content-header">Book Detail</h1>
+
+<div class="book-card-wrapper">
+  {% include "book/book_detail_card.html" %}
+>>>>>>> 03f1f0ef385dfd9c2ef6fde8035eaa2023034f1f
 </div>
+
+{% comment %} TODO: Add Reviews/Comments Here! {% endcomment %}
+{% endblock %}
 
