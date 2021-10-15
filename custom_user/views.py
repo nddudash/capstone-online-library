@@ -16,9 +16,12 @@ from django.views.generic.edit import DeleteView
 
 # Create your views here.
 def user_profile_view(request, id):
-    profiles = CustomUser.objects.get(id=id)
-    books = Book.objects.all()
-    return render(request, 'profile.html', {'profiles': profiles, 'books': books})
+    try:
+        profiles = CustomUser.objects.get(id=id)
+        books = Book.objects.all()
+        return render(request, 'profile.html', {'profiles': profiles, 'books': books})
+    except:
+        return render(request, 'user_error.html')
 
 
 class LoginView(BaseLoginView):
