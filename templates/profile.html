@@ -1,5 +1,9 @@
-{% include "nav.html" %}
+{% extends "base.html" %}
+<!-- Added Template Extending to this page -->
+{% block content%}
+<h1 class="content-header">{{profiles.username}}'s Profile</h1>
 
+{% block profile_card %}
 <ul>
   <li>username: {{profiles.username}}</li>
   <li>Card Number: {{profiles.library_card_number}}</li>
@@ -7,17 +11,13 @@
   <li>Checked Out Books: {{profiles.checked_out_books.all}}</li>
   {% endif%}
 </ul>
+{% endblock %}
 
 {% if profiles.checked_out_books.all %}
+<h2>Checked Out Books</h2>
 {% for book in profiles.checked_out_books.all %}
 {% comment %} TODO: Replace with Consistent Book Card {% endcomment %}
-<div>
-  <h2>Checked Out Books</h2>
-  <p>Title: {{book.title}}</p>
-  <p>Author:{{book.author}}</p>
-  <p>Available Copies: {{book.copies_available}}</p>
-  <button onclick="window.location.href='/return/{{book.id}}'">Return Book</button>
-</div>
+  {% include "book/book_detail_card.html" with book=book %}
 {% endfor %}
 {% endif%}
 
@@ -27,3 +27,4 @@
 </button>
 <a href="/delete_user/{{profiles.pk}}">Delete Account</a>
 {% endif %}
+{% endblock %}

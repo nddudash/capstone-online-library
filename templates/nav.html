@@ -1,6 +1,6 @@
 {% comment %} CITATION -
 https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
-{% load static %} <link rel="stylesheet" href={% static "book/main.css" %}>
+{% load notification_extras %}
 
 <div class="nav-wrapper">
   <nav class="nav-bar">
@@ -11,11 +11,16 @@ https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
       {% if not request.user.is_authenticated %}
       <li><a href="/login_view/">Login</a></li>
       <li><a href="/sign_up_view/">Sign Up</a></li>
-      {% elif request.user.is_authenticated %} {% comment %}
-      <li><a href="/notifications/{{user.id}}">Notifications</a></li>
-      {% endcomment %}
+      {% elif request.user.is_authenticated %} 
+      {% with new_notification=request.user.notifications_set|get_exclamation %}
       <li><a href="/profile/{{request.user.id}}">Profile</a></li>
       <li><a href="/logout_view">Logout</a></li>
+      {% if new_notification%}
+      <li><a href="/notifications/{{request.user.id}}">Notifications (*)</a></li>
+      {% else %}
+      <li><a href="/nonots">Notifications</a></li>
+      {% endif %}
+      {% endwith %}
       {% endif %}
     </ul>
   </nav>

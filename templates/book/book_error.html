@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'book/main.css' %}" />
+{% block content %}
+<div>
+  {% include "nav.html" %}
+  {% if header %}
+  <h1>{{header}}</h1>
+  {% endif %}
+  <h1>This book isn't in our library. Try adding it below.</h1>
+  <a href='/books/add/'>Search for a Book</a>
+</div>
+{% endblock %}

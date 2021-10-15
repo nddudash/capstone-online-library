@@ -1,0 +1,73 @@
+
+
+<div class="book-card">
+
+  <div class = "left-column">
+    <div class="book-img">
+      {% if book.image_file %}
+      <img src="{{book.image_file.url}}" alt="book pic" />
+      {% else %}
+      <img src="/media/book_covers/placeholder.jpg" alt="placeholder" />
+      {% endif %}
+    </div>
+  </div>
+
+  <div class = "right-column">
+
+    <div class = "right-header">
+      <div class="book-title">
+        <p><a href="/book_detail/{{book.id}}">{{book.title}}</a></p>
+      </div>
+
+      <div class="book-author">
+        <p>{{book.author}}</p>
+      </div>
+    </div>
+
+    <div class = "right-body">
+      <p>Copies Available: {{book.copies_available}}</p>
+    </div>
+
+    <div class = "right-footer">
+      <div class="book-buttons-wrapper">
+        <ul class="book-buttons-list">
+          {% if book in request.user.checked_out_books.all %}
+          <li>
+            {% comment %} TODO: Popout Reader {% endcomment %}
+            <button onclick="window.open('{{book.text}}', '_blank')">
+              Read Online
+            </button>
+          </li>
+          <li>
+            <button onclick="window.location.href='/return/{{book.id}}'">
+              Return Book
+            </button>
+          </li>
+          {% elif book.copies_available and book not in request.user.checked_out_books.all%}
+          <li>
+            <button onclick="window.location.href='/checkout/{{book.id}}'">
+              Checkout Book
+            </button>
+          </li>
+          {% elif book.copies_available == 0 and book not in request.user.checked_out_books.all%}
+            {% if book in request.user.reserved_books.all %}
+              <li>
+                <button class = "btn-disabled" disabled>
+                  Book Reserved
+                </button>
+              </li>
+            {% else %}
+              <li>
+                <button onclick = "window.location.href='/reserve/{{book.id}}'">
+                  Reserve Book
+                </button>
+              </li>
+            {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
