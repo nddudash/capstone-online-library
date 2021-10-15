@@ -21,11 +21,13 @@ def index_view(request):
 
 
 def book_detail(request, id):
-    template_name = 'book/book_detail.html'
-    book = Book.objects.get(id=id)
-    context = {'book': book}
-    return render(request, template_name, context)
-
+    try:
+        template_name = 'book/book_detail.html'
+        book = Book.objects.get(id=id)
+        context = {'book': book}
+        return render(request, template_name, context)
+    except:
+        return render(request, 'book/book_error.html')
 
 def book_add_search_view(request):
     context = {
