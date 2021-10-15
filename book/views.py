@@ -111,17 +111,19 @@ def edit_user_view(request, edit_id):
 
 
 def comment_view(request, pk):
-    post = get_object_or_404(Book, pk=pk)
+    post = get_object_or_404(Comment, pk=pk)
+    comments = post.comments.filter(active=True)
+    new_comment = None
     if request.method == 'POST':
-        comments = CommentForm(request.POST)
-        if comments.is_valid():
-            comment = comments.save(active=False)
-            comment.post = post
-            comment.user = request.user
-            comment.save()
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comments.save(active=False)
+            new_comment.post = post
+            new_comment.user = request.user
+            new_comment.save()
             return HttpResponseRedirect('home')
         else:
             form = CommentForm()
-            return render(request, 'generic.html', {'form': form, 'comments': comments})
+            return render(request, 'comment.html', {'form': form, 'comments': comments, 'new_comments': new_comment, 'comment_form': comment_form})
     # return render(request, 'book/all_books.html', {'books': books})
     # redirect here

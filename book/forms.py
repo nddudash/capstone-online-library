@@ -11,4 +11,4 @@ class BookSearchForm(forms.Form):
 class CommentForm(forms.Form):
     class Meta:
         model = Comment
-        fields = ('post')
+        fields = ('post', 'username','body')
