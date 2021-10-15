@@ -68,19 +68,21 @@ def edit_user_view(request, edit_id):
     form = UserForm
     user = CustomUser.objects.get(id=edit_id)
     if request.method == 'POST':
-        info = UserForm(request.POST)
+        info = UserForm(request.POST, request.FILES)
         if info.is_valid():
             data = info.cleaned_data
             user.username = data['username']
             user.password = make_password(data['password'])
+            user.profile_image = data['profile_image']
             user.save()
+            print(data)
             # CITATION - https://stackoverflow.com/questions/30821795/django-user-logged-out-after-password-change
             update_session_auth_hash(request, user)
             # TODO: Redirect to Home!
             return redirect(reverse('books_page'))
 
     form = UserForm(
-        initial={'username': user.username, 'password': user.password})
+        initial={'username': user.username, 'password': user.password, 'profile_image' : user.profile_image})
 
     return render(request, 'generic.html', {'form': form, 'header': 'Edit Account'})
 

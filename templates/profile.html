@@ -2,6 +2,8 @@
 <!-- Added Template Extending to this page -->
 {% block profile_card %}
 <ul>
+  <img src="{{profiles.profile_image.url}}" width="200">
+
   <li>username: {{profiles.username}}</li>
   <li>Card Number: {{profiles.library_card_number}}</li>
   {% if profiles.checked_out_books.all %}

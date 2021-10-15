@@ -57,6 +57,7 @@ class UserAdmin(BaseUserAdmin):
                 'library_card_number',
                 'checked_out_books',
                 'reserved_books',
+                'profile_image'
             )
         }),
     )

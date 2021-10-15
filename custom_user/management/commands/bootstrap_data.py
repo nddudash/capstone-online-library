@@ -18,6 +18,7 @@ class Command(BaseCommand):
             CustomUser.objects.create(
                 username="admin",
                 password=make_password("password"),
+                profile_image="profile.jpg",
                 is_staff=True,
                 is_superuser=True,
             )
