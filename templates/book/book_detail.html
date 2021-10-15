@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Book Detail</h1>
-<div class "book-detail-card-wrapper">
+<h1 class="content-header">Book Detail</h1>
+
+<div class="book-card-wrapper">
   {% include "book/book_detail_card.html" %}
 </div>
+
+{% comment %} TODO: Add Reviews/Comments Here! {% endcomment %}
 {% endblock %}
 

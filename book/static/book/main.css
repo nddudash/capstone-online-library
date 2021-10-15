@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+/* Book Card Rules */
+
 .book-card {
   display: flex;
   flex-direction: row;
@@ -65,7 +67,11 @@
 }
 
 .book-buttons-list li {
-  float: left;
+  float: right;
+}
+
+.book-buttons-list:first-child {
+  border-bottom-right-radius: 10px;
 }
 
 .book-buttons-list li button {
@@ -73,13 +79,17 @@
   font-size: 1.25em;
 }
 
+.book-buttons-list .btn-disabled {
+  background-color: #89dcff;
+}
+
 .book-card .left-column {
   min-height: 100%;
 }
 
 .book-card .book-img {
-  width: 200px;
-  min-width: 200px;
+  min-width: 150px;
+  max-width: 150px;
   height: 100%;
   overflow: hidden;
 }
@@ -94,7 +104,20 @@
   /* justify-self: flex-end; */
 }
 
-/* TODO: Move these navigation targeting rules to a more appropriate location! */
+/* Book Card Container Rules */
+.book-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Book Detail Page Rules */
+
+
+/* Navigation Bar Rules */
+
 .nav-list {
   list-style-type: none;
   margin: 0;
@@ -122,7 +145,7 @@
   background-color: rgb(14, 146, 227);
 }
 
-/* TODO: Give pages overall better look */
+/* body rules */
 body {
   background: linear-gradient(to right, #5433ff, #20bdff);
   margin: 0 auto;
@@ -130,6 +153,7 @@ body {
   font-family: "Nunito";
 }
 
+/* base.html rules */
 .content-wrapper {
   display: flex;
   flex-direction: column;
@@ -180,7 +204,8 @@ button:hover {
   padding: 30px 15px;
   border-radius: 10px;
   flex-grow: 2;
-  max-width: 60%;
-  flex-basis: auto;
+  max-width: 70%;
+  min-width: 50%;
+  flex-basis: 60%;
   text-align: center;
 }

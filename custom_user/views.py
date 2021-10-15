@@ -24,13 +24,11 @@ def user_profile_view(request, id):
 class LoginView(BaseLoginView):
     template_name = "generic.html"
     form = UserForm
-    # TODO: Redirect to Home Page!
     next_page = reverse_lazy('books_page')
     extra_context = {'header': 'Login'}
 
 
 class LogoutView(BaseLogoutView):
-    # TODO: Redirect to Home Page!
     next_page = reverse_lazy('books_page')
 
 
@@ -50,7 +48,6 @@ class SignUpView(FormView):
 
             if new_user:
                 login(self.request, new_user)
-                # TODO: Redirect to Home!
                 return redirect(reverse('books_page'))
 
         except IntegrityError:
@@ -74,9 +71,9 @@ def edit_user_view(request, edit_id):
             user.username = data['username']
             user.password = make_password(data['password'])
             user.save()
+            print("Success", user.password)
             # CITATION - https://stackoverflow.com/questions/30821795/django-user-logged-out-after-password-change
             update_session_auth_hash(request, user)
-            # TODO: Redirect to Home!
             return redirect(reverse('books_page'))
 
     form = UserForm(

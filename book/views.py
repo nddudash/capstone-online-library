@@ -1,6 +1,5 @@
 import requests
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.core.exceptions import ObjectDoesNotExist
 from book.templatetags.book_extras import get_readable, get_image
 from django.contrib.auth.decorators import login_required
@@ -8,7 +7,6 @@ from book.models import Book
 from book.forms import BookSearchForm
 from notification.models import Notifications
 from book.models import Book
-from custom_user.models import CustomUser
 
 # Create your views here.
 
@@ -74,8 +72,7 @@ def book_add_commit_view(request, id):
             notification.save()
         book.save()
 
-        # TODO: Redirect to Book Detail View
-        return HttpResponse("You've added a book")
+        return redirect(reverse("book_detail_page", args={book.id}))
 
     except ObjectDoesNotExist:
         response = requests.get(f'http://gutendex.com/books/{id}')
@@ -92,8 +89,7 @@ def book_add_commit_view(request, id):
 
         new_book.save()
 
-        # TODO: Redirect to Book Detail View
-        return HttpResponse("You've added a book")
+        return redirect(reverse("book_detail_page", args={new_book.id}))
 
 
 def book_list_view(request):
