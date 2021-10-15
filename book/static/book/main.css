@@ -100,3 +100,8 @@ button:hover{
     height: 300px;
     text-align: center;
 }
+
+#logo{
+  color: #5433FF;
+  font: italic;
+}
