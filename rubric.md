@@ -3,7 +3,7 @@
     - [x] - LogoutView
     - [x] - FormView
 - [x] 6 pts. - Secrets are not commits to the Repo. Use a .env file!
-- [ ] 6 pts. - All Network Requests have sufficient Exception Handling for 4xx and 5xx responses
+- [x] 6 pts. - All Network Requests have sufficient Exception Handling for 4xx and 5xx responses
 - [ ] 6 pts. - DRY. Don't Repeat Yourself! Any repetitive code should be abstracted to a helper function!
 - [x] 6 pts. - At least one 'normal' Simple Form and one Model Form.
     - [x] Simple Form

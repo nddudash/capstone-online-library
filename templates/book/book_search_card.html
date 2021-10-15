@@ -1,21 +1,45 @@
 {% load book_extras %}
-{% load static %}
-<link rel="stylesheet" href={% static "book/main.css" %}>
 
 <div class="book-card">
-    <div class = "book-img">
-        <img src={{result.formats | get_key:"image/jpeg"}} alt="book pic"/>
+
+  <div class = "left-column">
+    <div class="book-img">
+      {% with book_cover=result.formats|get_key:"image/jpeg"%}
+      {% if book_cover %}
+      <img src="{{book_cover}}" alt="book pic" />
+      {% else %}
+      <img src="/media/book_covers/placeholder.jpg" alt="placeholder" />
+      {% endif %}
+      {% endwith %}
     </div>
-    <div class = "book-title">
-        <p>Title: {{result.title}}</p>
+  </div>
+
+  <div class = "right-column">
+
+    <div class = "right-header">
+      <div class="book-title">
+        <p>{{result.title}}</p>
+      </div>
+
+      <div class="book-author">
+        <p>{{result.authors.0.name}}</p>
+      </div>
     </div>
-    <div class = "book-author">
-        <p>Author: {{result.authors.0.name}}</p>
+
+    <div class = "right-body">
+      {% comment %} <p>Copies Available: {{book.copies_available}}</p> {% endcomment %}
     </div>
-    <div class = "book-text">
-        <p>Read Online: {{result.formats | get_readable}}</p>
+
+    <div class = "right-footer">
+      <div class="book-buttons-wrapper">
+        <ul class="book-buttons-list">
+          <li>
+            <button onclick = "window.location.href='/books/add/{{result.id}}'">Provide a Copy</button>
+          </li>
+        </ul>
+      </div>
+
     </div>
-    <div class = "book-controls">
-        <button onclick = "window.location.href='/books/add/{{result.id}}'">Provide a Copy</button>
-    </div>
+
+  </div>
 </div>

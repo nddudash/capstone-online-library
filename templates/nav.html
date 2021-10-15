@@ -1,7 +1,6 @@
 {% comment %} CITATION -
 https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
 {% load notification_extras %}
-{% load static %} <link rel="stylesheet" href={% static "book/main.css" %}>
 
 <div class="nav-wrapper">
   <nav class="nav-bar">
@@ -9,11 +8,11 @@ https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
       <li><a href="/">Home</a></li>
       <li><a href="/all_books/">Catalouge</a></li>
       <li><a href="/books/add/">Donate</a></li>
-      {% with new_notification=request.user.notifications_set|get_exclamation %}
       {% if not request.user.is_authenticated %}
       <li><a href="/login_view/">Login</a></li>
       <li><a href="/sign_up_view/">Sign Up</a></li>
       {% elif request.user.is_authenticated %} 
+      {% with new_notification=request.user.notifications_set|get_exclamation %}
       <li><a href="/profile/{{request.user.id}}">Profile</a></li>
       <li><a href="/logout_view">Logout</a></li>
       {% if new_notification%}
@@ -21,8 +20,8 @@ https://stackoverflow.com/questions/340888/navigation-in-django {% endcomment %}
       {% else %}
       <li><a href="/nonots">Notifications</a></li>
       {% endif %}
-      {% endif %}
       {% endwith %}
+      {% endif %}
     </ul>
   </nav>
 </div>
