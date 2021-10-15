@@ -209,3 +209,9 @@ button:hover {
   flex-basis: 60%;
   text-align: center;
 }
+
+#logo{
+  color: #5433ff;
+  font-family: "Nunito";
+  font-style: italic;
+}
