@@ -32,7 +32,7 @@ class LoginView(BaseLoginView):
 
 
 class LogoutView(BaseLogoutView):
-    next_page = reverse_lazy('books_page')
+    next_page = reverse_lazy('homepage')
 
 
 class SignUpView(FormView):
