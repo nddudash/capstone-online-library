@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from book.views import book_add_search_view, book_add_commit_view, book_detail, book_list_view, index_view
 from custom_user.views import LoginView, LogoutView, SignUpView, user_profile_view, edit_user_view, CustomUserDeleteView
-from reservations.views import reservation_view
+from reservations.views import reservation_view, remove_reservation_view
 from checkout.views import checkout_book_view, return_book_view
 from notification.views import notifications_view, no_nots_view
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('books/add/', book_add_search_view, name='AddBookView'),
     path('admin/', admin.site.urls),
     path('reserve/<int:id>/', reservation_view, name='reserve'),
+    path('remove_reservation/<int:id>/', remove_reservation_view, name='remove_reservation'),
     path('book_detail/<int:id>/', book_detail, name='book_detail_page'),
     path('notifications/<int:user_id>/', notifications_view, name='notification'),
     path('nonots/', no_nots_view, name='no_nots'),
