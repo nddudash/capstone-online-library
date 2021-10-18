@@ -21,6 +21,14 @@
 {% endfor %}
 {% endif%}
 
+{% if profiles.reserved_books.all %}
+<h2>Reserved Books</h2>
+{% for book in profiles.reserved_books.all %}
+{% comment %} TODO: Replace with Consistent Book Card {% endcomment %}
+  {% include "book/book_detail_card.html" with book=book %}
+{% endfor %}
+{% endif%}
+
 {% if profiles.id == request.user.id %}
 <button onclick = "window.location.href='/edit/{{request.user.id}}'">
   Edit Account Information
