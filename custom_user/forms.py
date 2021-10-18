@@ -8,3 +8,8 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['username']
+
+class EditUserForm(forms.Form):
+    username = forms.CharField(required=False)
+    password = forms.CharField(widget=forms.PasswordInput, required= False)
+    profile_image = forms.ImageField(required=False)
