@@ -4,7 +4,7 @@ import requests
 from PIL import Image
 from django.db import models
 from django.core.files.images import ImageFile
-from requests.sessions import default_headers
+
 
 # Create your models here.
 # CITATION - https://stackoverflow.com/questions/16381241/django-save-image-from-url-and-connect-with-imagefield
@@ -19,7 +19,7 @@ class Book(models.Model):
     gutenberg_id = models.IntegerField(default=0)
     is_reserved = models.BooleanField(default=False)
     image_file = models.ImageField(
-        upload_to="book_covers", default='/imgs/placeholder.jpg')
+        upload_to="book_covers", default='/static/images/placeholder.jpg')
     image_url = models.URLField(max_length=1500, blank=True, null=True)
 
     def __str__(self):
