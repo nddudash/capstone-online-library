@@ -146,6 +146,13 @@ LOGIN_URL = "/login_view/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Register our Website-wide Images directory to collectstatic
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
 # Configuration for Deployment, using Django-Heroku
 import django_heroku
 django_heroku.settings(locals())

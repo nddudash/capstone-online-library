@@ -8,7 +8,7 @@
       {% if book_cover %}
       <img src="{{book_cover}}" alt="book pic" />
       {% else %}
-      <img src="/media/imgs/placeholder.jpg" alt="placeholder" />
+      <img {% static "images/placeholder.jpg" %} alt="placeholder" />
       {% endif %}
       {% endwith %}
     </div>

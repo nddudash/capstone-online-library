@@ -1,5 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<img src='/media/imgs/500error.jpg' alt='500 Error'>
+<img src={% static "images/500error.jpg" %} alt="500 Error"
 {% endblock %}
