@@ -48,12 +48,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     # Cloudinary Storage has to be loaded before staticfiles!
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'custom_user',
     'notification',
     'book',
     'checkout',
-    'cloudinary_storage',
     'cloudinary',
 ]
 
