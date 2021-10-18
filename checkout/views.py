@@ -16,8 +16,6 @@ def checkout_book_view(request, book_id):
         checkout_user.checked_out_books.add(book)
         checkout_user.save()
         return HttpResponseRedirect(reverse('book_detail_page', kwargs={'id': book_id}))
-#   This is just placeholder text for now, pending proper error handling
-    return HttpResponse('Something went wrong')
 
 @login_required
 def return_book_view(request, book_id):
@@ -36,6 +34,4 @@ def return_book_view(request, book_id):
         book.save()
         checkout_user.checked_out_books.remove(book)
         checkout_user.save()
-        return HttpResponseRedirect(reverse('book_detail_page', kwargs={'id': book_id}))
-#   This is just placeholder text for now, pending proper error handling
-    return HttpResponse('Something went wrong')
+        return HttpResponseRedirect(reverse('books_page', kwargs={'id': book_id}))
