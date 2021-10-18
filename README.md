@@ -32,3 +32,5 @@ https://stackoverflow.com/questions/1276887/default-image-for-imagefield-in-djan
 Lord Elron and rockingskier - Download a remote image and save it to a Django model - https://stackoverflow.com/questions/16174022/download-a-remote-image-and-save-it-to-a-django-model
 
 Daniel Diaz - Django Media Files With Heroku - https://developerroad.herokuapp.com/blog/article/10/
+
+Heroku Dev Center - Deploying Python and Django Apps on Heroku - https://devcenter.heroku.com/articles/deploying-python
