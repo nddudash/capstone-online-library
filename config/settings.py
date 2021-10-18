@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary_storage
+# import cloudinary.uploader
+# import cloudinary.api
 
 # Setup for Getting Environment Variables
 # CITATION - https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/
