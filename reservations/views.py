@@ -17,3 +17,12 @@ def reservation_view(request, id):
         book.save()
         return HttpResponseRedirect(reverse('books_page'))
 
+@login_required
+def remove_reservation_view(request, id):
+    user = CustomUser.objects.get(username=request.user.username)
+    book = Book.objects.get(id=id)
+
+    if book in user.reserved_books.all():
+        user.reserved_books.remove(book)
+        user.save()
+        return HttpResponseRedirect(reverse('books_page'))
