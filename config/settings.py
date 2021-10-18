@@ -50,11 +50,11 @@ INSTALLED_APPS = [
     # Cloudinary Storage has to be loaded before staticfiles!
     'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'custom_user',
     'notification',
     'book',
     'checkout',
-    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -168,10 +168,10 @@ django_heroku.settings(locals())
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': "drmujqq5c",
     'API_KEY': "516111141435383",
-    'API_SECRET': "UkfC-gsKuAjzznNbqH6qMR5RjPs"
+    'API_SECRET': "UkfC-gsKuAjzznNbqH6qMR5RjPs",
 }
 
 CLOUDINARY_URL="cloudinary://516111141435383:UkfC-gsKuAjzznNbqH6qMR5RjPs@drmujqq5c"
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
