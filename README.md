@@ -30,3 +30,5 @@ Manish and Alexander P - Default Image for ImageField -
 https://stackoverflow.com/questions/1276887/default-image-for-imagefield-in-djangos-orm
 
 Lord Elron and rockingskier - Download a remote image and save it to a Django model - https://stackoverflow.com/questions/16174022/download-a-remote-image-and-save-it-to-a-django-model
+
+Daniel Diaz - Django Media Files With Heroku - https://developerroad.herokuapp.com/blog/article/10/

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from decouple import config
 
 # Setup for Getting Environment Variables
 # CITATION - https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
     'notification',
     'book',
     'checkout',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +159,12 @@ STATIC_URL = '/static/'
 # Configuration for Deployment, using Django-Heroku
 import django_heroku
 django_heroku.settings(locals())
+
+# Configuration for Cloudinary Storage, for serving Media during production
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': "drmujqq5c",
+    'API_KEY': "516111141435383",
+    'API_SECRET': "UkfC-gsKuAjzznNbqH6qMR5RjPs",
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
