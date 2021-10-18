@@ -34,4 +34,4 @@ def return_book_view(request, book_id):
         book.save()
         checkout_user.checked_out_books.remove(book)
         checkout_user.save()
-        return HttpResponseRedirect(reverse('books_page', kwargs={'id': book_id}))
+        return HttpResponseRedirect(reverse('books_page'))

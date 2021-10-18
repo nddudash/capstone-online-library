@@ -13,7 +13,7 @@ from book.models import Book
 
 
 def index_view(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect(reverse('books_page'))
     else:
         template_name = 'index.html'
