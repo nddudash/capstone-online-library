@@ -12,9 +12,6 @@
 {%endif%}
   <li>username: {{profiles.username}}</li>
   <li>Card Number: {{profiles.library_card_number}}</li>
-  {% if profiles.checked_out_books.all %}
-  <li>Checked Out Books: {{profiles.checked_out_books.all}}</li>
-  {% endif%}
 </ul>
 {% endblock %}
 
