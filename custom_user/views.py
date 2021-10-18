@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, IntegrityError
 from django.shortcuts import render, HttpResponseRedirect, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -20,7 +21,7 @@ def user_profile_view(request, id):
         profiles = CustomUser.objects.get(id=id)
         books = Book.objects.all()
         return render(request, 'profile.html', {'profiles': profiles, 'books': books})
-    except:
+    except ObjectDoesNotExist:
         return render(request, 'user_error.html')
 
 

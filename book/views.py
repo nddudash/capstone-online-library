@@ -14,7 +14,7 @@ from book.models import Book
 
 def index_view(request):
     if request.user.is_authenticated():
-        return reverse('books_page')
+        return redirect(reverse('books_page'))
     else:
         template_name = 'index.html'
         book = Book.objects.all()
@@ -28,7 +28,7 @@ def book_detail(request, id):
         book = Book.objects.get(id=id)
         context = {'book': book}
         return render(request, template_name, context)
-    except:
+    except ObjectDoesNotExist:
         return render(request, 'book/book_error.html')
 
 def book_add_search_view(request):
