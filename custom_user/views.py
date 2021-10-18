@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, IntegrityError
 from django.shortcuts import render, HttpResponseRedirect, redirect, reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -35,7 +36,7 @@ class LoginView(BaseLoginView):
 
 
 class LogoutView(BaseLogoutView):
-    next_page = reverse_lazy('books_page')
+    next_page = reverse_lazy('homepage')
 
 
 class SignUpView(FormView):

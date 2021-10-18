@@ -52,8 +52,8 @@
           {% elif book.copies_available == 0 and book not in request.user.checked_out_books.all%}
             {% if book in request.user.reserved_books.all %}
               <li>
-                <button class = "btn-disabled" disabled>
-                  Book Reserved
+                <button onclick = "window.location.href='/remove_reservation/{{book.id}}'">
+                  Remove Reservation
                 </button>
               </li>
             {% else %}

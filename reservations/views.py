@@ -15,8 +15,14 @@ def reservation_view(request, id):
         book.is_reserved = True
         book.reserved_by = user
         book.save()
-#   This will redirect to the home page or user detail page, once they are finished
-        return HttpResponseRedirect(reverse('book_detail_page', kwargs={'id': id}))
-#   This is just placeholder text for now, pending proper error handling
-    return HttpResponse('Something went wrong')
+        return HttpResponseRedirect(reverse('books_page'))
 
+@login_required
+def remove_reservation_view(request, id):
+    user = CustomUser.objects.get(username=request.user.username)
+    book = Book.objects.get(id=id)
+
+    if book in user.reserved_books.all():
+        user.reserved_books.remove(book)
+        user.save()
+        return HttpResponseRedirect(reverse('books_page'))

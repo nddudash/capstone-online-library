@@ -1,3 +1,4 @@
+from io import RawIOBase
 import requests
 from django.shortcuts import render, redirect, reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -12,10 +13,13 @@ from book.models import Book
 
 
 def index_view(request):
-    template_name = 'index.html'
-    book = Book.objects.all()
-    context = {"book": book}
-    return render(request, template_name, context)
+    if request.user.is_authenticated:
+        return redirect(reverse('books_page'))
+    else:
+        template_name = 'index.html'
+        book = Book.objects.all()
+        context = {"book": book}
+        return render(request, template_name, context)
 
 
 def book_detail(request, id):
@@ -24,7 +28,7 @@ def book_detail(request, id):
         book = Book.objects.get(id=id)
         context = {'book': book}
         return render(request, template_name, context)
-    except:
+    except ObjectDoesNotExist:
         return render(request, 'book/book_error.html')
 
 def book_add_search_view(request):
