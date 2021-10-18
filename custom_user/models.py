@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
     checked_out_books = models.ManyToManyField(to='book.Book', blank=True, related_name='checked_out')
     reserved_books = models.ManyToManyField(to='book.Book', blank=True)
     library_card_number = models.CharField(max_length=10, default=random_card_number)
-    profile_image = models.ImageField(upload_to='profile_pic', default='profile.jpg', null= True, blank= True)
+    profile_image = models.ImageField(upload_to='profile_pic', default='imgs/profile.jpg', null= True, blank= True)
     image_url = models.URLField(max_length=1500, blank=True, null=True)
 
     def __str__(self) -> str:
