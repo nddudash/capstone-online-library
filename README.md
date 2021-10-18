@@ -1,6 +1,6 @@
 # Authors
 
-Nicholas Dudash - https://github.com/nddudash
+Nicholas D. Dudash - https://github.com/nddudash
 
 Brandon Shipley - https://github.com/bshipley1289
 
