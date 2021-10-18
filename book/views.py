@@ -1,11 +1,6 @@
 from django.contrib.auth.models import User
 import requests
-<<<<<<< HEAD
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-=======
-from django.shortcuts import render, redirect, reverse
->>>>>>> 03f1f0ef385dfd9c2ef6fde8035eaa2023034f1f
+from django.shortcuts import get_object_or_404, render, redirect, HttpResponseRedirect,reverse
 from django.core.exceptions import ObjectDoesNotExist
 from book.models import Book, Comment
 from book.forms import BookSearchForm, CommentForm
@@ -13,11 +8,7 @@ from custom_user.forms import UserForm
 from book.templatetags.book_extras import get_readable, get_image
 from django.contrib.auth.decorators import login_required
 from notification.models import Notifications
-<<<<<<< HEAD
-from custom_user.models import CustomUser
-=======
 from book.models import Book
->>>>>>> 03f1f0ef385dfd9c2ef6fde8035eaa2023034f1f
 
 # Create your views here.
 
@@ -119,8 +110,8 @@ def edit_user_view(request, edit_id):
 
 
 def comment_view(request, pk):
-    post = get_object_or_404(Comment, pk=pk)
-    comments = post.comments.filter(active=True)
+    post = get_object_or_404(Book, pk=pk)
+    comments = Comment.objects.filter(active=True)
     new_comment = None
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -132,6 +123,6 @@ def comment_view(request, pk):
             return HttpResponseRedirect('home')
         else:
             form = CommentForm()
-            return render(request, 'comment.html', {'form': form, 'comments': comments, 'new_comments': new_comment, 'comment_form': comment_form})
+            return render(request, 'generic.html', {'form': form, 'comments': comments, 'new_comments': new_comment, 'comment_form': comment_form})
     # return render(request, 'book/all_books.html', {'books': books})
     # redirect here
