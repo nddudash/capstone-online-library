@@ -167,12 +167,12 @@ django_heroku.settings(locals())
 
 # Configuration for Cloudinary Storage, for serving Media during production
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': "drmujqq5c",
-    'API_KEY': "516111141435383",
-    'API_SECRET': "UkfC-gsKuAjzznNbqH6qMR5RjPs",
+    'CLOUD_NAME': os.getenv("CLOUD_NAME"),
+    'API_KEY': os.getenv("API_KEY"),
+    'API_SECRET': os.getenv("API_SECRET"),
 }
 
-CLOUDINARY_URL="cloudinary://516111141435383:UkfC-gsKuAjzznNbqH6qMR5RjPs@drmujqq5c"
+CLOUDINARY_URL=os.getenv("CLOUDINARY_URL")
 
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
