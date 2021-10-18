@@ -55,21 +55,25 @@ class Book(models.Model):
                     file_name,
                     temp
                 )
+                self.save()
 
         elif not settings.DEBUG:
             # CITATION - https://github.com/cloudinary/pycloudinary/blob/master/samples/basic/basic.py
-            if os.path.exists("config/settings.py"):
-                exec(open("config/settings.py").read())
+            if "cloudinary" not in self.image_url:
 
-            response = cloudinary.uploader.upload(
-                self.image_url,
-            )
+                if os.path.exists("config/settings.py"):
+                    exec(open("config/settings.py").read())
 
-            print("UPLOAD: ")
-            for key in sorted(response.keys()):
-                print("  %s: %s" % (key, response[key]))
+                response = cloudinary.uploader.upload(
+                    self.image_url,
+                )
 
-            self.image_url.save(response["secure_url"])
+                print("UPLOAD: ")
+                for key in sorted(response.keys()):
+                    print("  %s: %s" % (key, response[key]))
+
+                self.image_url = (response["secure_url"])
+                self.save()
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
