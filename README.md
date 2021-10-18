@@ -34,3 +34,5 @@ Lord Elron and rockingskier - Download a remote image and save it to a Django mo
 Daniel Diaz - Django Media Files With Heroku - https://developerroad.herokuapp.com/blog/article/10/
 
 Heroku Dev Center - Deploying Python and Django Apps on Heroku - https://devcenter.heroku.com/articles/deploying-python
+
+bchhun and Flimm - Django Settings Variables in Templates - https://stackoverflow.com/questions/433162/can-i-access-constants-in-settings-py-from-templates-in-django

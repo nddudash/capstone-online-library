@@ -7,7 +7,6 @@ import cloudinary.uploader
 from django.conf import settings
 
 
-
 # Create your models here.
 # CITATION - https://stackoverflow.com/questions/16381241/django-save-image-from-url-and-connect-with-imagefield
 
@@ -56,7 +55,7 @@ class Book(models.Model):
                     file_name,
                     temp
                 )
-                
+
         elif not settings.DEBUG:
             # CITATION - https://github.com/cloudinary/pycloudinary/blob/master/samples/basic/basic.py
             if os.path.exists("config/settings.py"):
@@ -65,15 +64,12 @@ class Book(models.Model):
             response = cloudinary.uploader.upload(
                 self.image_url,
             )
-            
+
             print("UPLOAD: ")
             for key in sorted(response.keys()):
                 print("  %s: %s" % (key, response[key]))
-                
-            self.image_file.save(
-                response["secure_url"],
-                response["secure_url"],
-            )
+
+            self.image_url.save(response["secure_url"])
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
