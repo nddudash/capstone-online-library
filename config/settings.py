@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary_storage
+# import cloudinary.uploader
+# import cloudinary.api
 
 # Setup for Getting Environment Variables
 # CITATION - https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/
@@ -31,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
 
@@ -44,6 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # If you want Cloudinary to host your static files as well,
+    # cloudinary_storage has to be loaded before django.contrib.staticfiles!
+    'cloudinary_storage',
+    'cloudinary',
     'custom_user',
     'notification',
     'book',
@@ -73,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'book.context_processors.debug',
             ],
         },
     },
@@ -145,3 +154,27 @@ LOGIN_URL = "/login_view/"
 # Registering Paths to store User Uploaded Images
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Register our Website-wide Images directory to collectstatic
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+# Configuration for Deployment, using Django-Heroku
+import django_heroku
+django_heroku.settings(locals())
+
+# Configuration for Cloudinary Storage, for serving Media during production
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv("CLOUD_NAME"),
+    'API_KEY': os.getenv("API_KEY"),
+    'API_SECRET': os.getenv("API_SECRET"),
+}
+
+CLOUDINARY_URL=os.getenv("CLOUDINARY_URL")
+
+# This is if you want Cloudinary to host your Static Files as well
+# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

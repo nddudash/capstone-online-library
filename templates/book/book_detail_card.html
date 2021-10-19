@@ -1,13 +1,15 @@
-
+{% load static %}
 
 <div class="book-card">
 
   <div class = "left-column">
     <div class="book-img">
-      {% if book.image_file %}
+      {% if book.image_file and debug %}
       <img src="{{book.image_file.url}}" alt="book pic" />
+      {% elif book.image_url and not debug %}
+      <img src="{{book.image_url}}" alt="book pic" />
       {% else %}
-      <img src="/media/imgs/placeholder.jpg" alt="placeholder" />
+      <img src={% static "images/placeholder.jpg" %} alt="placeholder" />
       {% endif %}
     </div>
   </div>

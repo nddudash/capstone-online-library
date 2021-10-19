@@ -31,6 +31,7 @@ def book_detail(request, id):
     except ObjectDoesNotExist:
         return render(request, 'book/book_error.html')
 
+
 def book_add_search_view(request):
     context = {
         "form": BookSearchForm,

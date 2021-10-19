@@ -1,5 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<img src='/media/imgs/403error.jpg' alt='403 Error'>
+<img src={% static "images/403error.jpg" %} alt="403 Error"
 {% endblock %}
