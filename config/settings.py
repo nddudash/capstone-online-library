@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # Cloudinary Storage has to be loaded before staticfiles!
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    # If you want Cloudinary to host your static files as well,
+    # cloudinary_storage has to be loaded before django.contrib.staticfiles!
+    'cloudinary_storage',
     'cloudinary',
     'custom_user',
     'notification',
@@ -174,5 +175,6 @@ CLOUDINARY_STORAGE = {
 
 CLOUDINARY_URL=os.getenv("CLOUDINARY_URL")
 
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+# This is if you want Cloudinary to host your Static Files as well
+# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
